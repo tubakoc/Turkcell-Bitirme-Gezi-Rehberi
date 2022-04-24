@@ -1,3 +1,13 @@
 <resources>
     <string name="app_name">GeziRehberim</string>
+
+    <string name="priorityText">Öncelik</string>
+    <string name="visitText">Ziyaret Ekle</string>
+    <string name="shortDescriptionText">Yer Kısa Tanım</string>
+    <string name="buttonLocationShowText">Konum Göster</string>
+    <string name="shortDescriptionTextHint">Yer kısa tanım bilgisi</string>
+    <string name="descriptionText">Kısa Açıklama</string>
+    <string name="descriptionTextHint">Kısa Açıklama en fazla 3 satır</string>
+    <string name="visitHistoryText">Ziyaret Geçmişi</string>
+    <string name="edittextInputHint">Girilen açıklama en fazla 3 satır</string>
 </resources>
