@@ -24,9 +24,10 @@ class TravelViewHolder (itemView : View, itemClick : ((position : Int)->Unit)) :
         priorityCircle = itemView.findViewById(R.id.priorityCircle)
         travelDate = itemView.findViewById(R.id.travelDate)
 
-
+        itemView.setOnClickListener {
+            itemClick(adapterPosition)
+        }
     }
-
 
     fun bindData(context : Context,place : Place) {
         //  Model oluşturulduktan sonra atama işlemleri yapılacak priority traveldate image eklenecek
@@ -34,10 +35,8 @@ class TravelViewHolder (itemView : View, itemClick : ((position : Int)->Unit)) :
         locationName.text = place.name
         locationDef.text = place.locationDefinition
         locationState.text = place.description
-
+        priorityCircle.setBackgroundColor(place.priority.getColorCode())
 
      }
-
-
 
     }
