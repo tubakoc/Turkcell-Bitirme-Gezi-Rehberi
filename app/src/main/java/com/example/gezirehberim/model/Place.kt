@@ -8,7 +8,7 @@ class Place {
     lateinit var locationDefinition: String
     lateinit var description: String
     lateinit var priority: Priority
-    var pictureList = ArrayList<String>()
+    var pictureList = ArrayList<Picture>()
     var latitude by Delegates.notNull<Double>()
     var longitude by Delegates.notNull<Double>()
     var visitation = ArrayList<Visitation>()
