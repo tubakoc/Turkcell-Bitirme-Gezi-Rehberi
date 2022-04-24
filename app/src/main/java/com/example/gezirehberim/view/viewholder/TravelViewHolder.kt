@@ -1,4 +1,4 @@
-package com.example.gezirehberim.view.vewholder
+package com.example.gezirehberim.view.viewholder
 
 import android.content.Context
 import android.view.View
