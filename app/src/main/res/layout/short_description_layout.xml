@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_edittext_card"
+    android:paddingStart="@dimen/margin_14"
+    android:paddingEnd="@dimen/margin_4"
+    android:paddingBottom="@dimen/margin_9">
+
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_12"
+        android:text="@string/shortDescriptionText"
+        android:textColor="@color/header_text_color"
+        android:textSize="10sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="SmallSp" />
+
+
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/appCompatEditText"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_8"
+        android:background="@null"
+        android:hint="@string/shortDescriptionTextHint"
+        android:textColor="@color/edittext_color"
+        android:textFontWeight="700"
+        android:textSize="10sp"
+        app:layout_constraintEnd_toEndOf="@+id/showLocationButton"
+        app:layout_constraintStart_toStartOf="@+id/textView"
+        app:layout_constraintTop_toBottomOf="@+id/textView"
+        tools:ignore="SmallSp" />
+
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/showLocationButton"
+        android:layout_width="50dp"
+        android:layout_height="30dp"
+        android:background="@drawable/bg_add_visit"
+        android:clickable="true"
+        android:foreground="?attr/selectableItemBackground"
+        android:maxLines="2"
+        android:text="@string/buttonLocationShowText"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:textSize="10sp"
+        app:layout_constraintBottom_toTopOf="@+id/appCompatEditText"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="SmallSp" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

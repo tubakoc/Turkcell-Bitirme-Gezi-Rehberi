@@ -7,5 +7,17 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="greenpriority">#00C914</color>
+
+    <color name="header_text_color">#4B4848</color>
+    <color name="edittext_color">#9E9E9E</color>
+
+
+    <color name="global_background">#E5E5E5</color>
+    <color name="global_color">#4DA7FC</color>
+
+    <color name="priority_one">#4DA7FC</color>
+    <color name="priority_two">#00C914</color>
+    <color name="priority_three">#C8C8C8</color>
+
+
 </resources>
