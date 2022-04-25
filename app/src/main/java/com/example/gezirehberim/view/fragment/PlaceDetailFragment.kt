@@ -47,10 +47,11 @@ class PlaceDetailFragment : Fragment() {
             //id yolladığımız için tek değer dönecek bu yüzden sıfırıncı indexi aldık direkt
             place=PlaceLogic.getPlaceDetail(_context!!,id)
         }
-      /* binding.descriptionLayout.textView.text=place
-           .description
-        binding.shortDescriptionLayout.textView.text=place.locationDefinition
-        binding.topBar.title.text=place.name*/
+        /*
+       binding.descriptionLayout.descriptionTextview.text=place.description
+        binding.shortDescriptionLayout.placeShortDescriptionTextview.text=place.locationDefinition
+        binding.topBar.title.text=place.
+        */
 
 
         //ekranda deneme amaçlı öncelik değeri gösterir
