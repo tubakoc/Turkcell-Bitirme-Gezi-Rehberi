@@ -35,6 +35,10 @@ class PlaceOperation(context: Context) {
             placeDatabase!!.close()
         }
     }
+    fun getLastInsertedId(){
+
+
+    }
     fun addPlace(place: Place): Long {
         val contentValues = ContentValues()
         contentValues.put(NAME, place.name)

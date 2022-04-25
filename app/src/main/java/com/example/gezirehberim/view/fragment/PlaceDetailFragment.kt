@@ -1,5 +1,6 @@
 package com.example.gezirehberim.view.fragment
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -12,12 +13,15 @@ import com.example.gezirehberim.constant.Constant
 import com.example.gezirehberim.constant.Constant.Companion.priorities
 import com.example.gezirehberim.constant.Priority
 import com.example.gezirehberim.databinding.FragmentDetailPlaceBinding
+import com.example.gezirehberim.logic.PlaceLogic
+import com.example.gezirehberim.model.Place
 import com.google.android.material.tabs.TabLayout
 
 class PlaceDetailFragment : Fragment() {
 
     private var _binding: FragmentDetailPlaceBinding? = null
     private val binding get() = _binding!!
+    lateinit var place:Place
 
     var selectedPhoto = 0
 
@@ -28,10 +32,20 @@ class PlaceDetailFragment : Fragment() {
     ): View {
         _binding = FragmentDetailPlaceBinding.inflate(layoutInflater, container, false)
         return binding.root
+
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        //ilk sayfada tıklanınca id yi argument ile buraya paslarız
+        val id=arguments?.getInt("id")
+        if(id!=null){
+            //id yolladığımız için tek değer dönecek bu yüzden sıfırıncı indexi aldık direkt
+            place=PlaceLogic.getPlaceDetail(requireContext(),id)
+        }
+       binding.descriptionLayout.textView.text=place
+           .description
+        binding.shortDescriptionLayout.textView.text=place.locationDefinition
 
 
         //ekranda deneme amaçlı öncelik değeri gösterir

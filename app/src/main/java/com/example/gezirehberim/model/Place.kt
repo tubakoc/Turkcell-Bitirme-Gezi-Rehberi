@@ -11,7 +11,7 @@ class Place {
     var pictureList = ArrayList<Picture>()
     var latitude by Delegates.notNull<Double>()
     var longitude by Delegates.notNull<Double>()
-    var visitation = ArrayList<Visitation>()
+    var visitationList = ArrayList<Visitation>()
     //sqlite boolean değer almadığı için 0 ve 1 kullanarak ziyaret durumu kontrol edilecek
     var isVisited=0
 }

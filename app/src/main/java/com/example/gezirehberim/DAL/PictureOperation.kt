@@ -61,7 +61,7 @@ class PictureOperation(context: Context) {
 
 
     @SuppressLint("Range")
-    fun getVisitation(visitationId: Int?,PlaceId: Int?): ArrayList<Picture> {
+    fun getPictures(visitationId: Int?,PlaceId: Int?): ArrayList<Picture> {
         open()
         val pictureList = ArrayList<Picture>()
         val picture = Picture()

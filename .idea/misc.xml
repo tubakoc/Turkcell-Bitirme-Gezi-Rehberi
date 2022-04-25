@@ -10,6 +10,12 @@
         <entry key="..\:/Users/Tuba/Desktop/KotlinProject/GeziRehberim/app/src/main/res/layout/fragment_travel.xml" value="0.22" />
         <entry key="..\:/Users/Tuba/Desktop/KotlinProject/GeziRehberim/app/src/main/res/layout/rvc_gezi_yer.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/Tuba/Desktop/KotlinProject/GeziRehberim/app/src/main/res/layout/rvc_travel.xml" value="0.5" />
+        <entry key="..\:/Users/utku/AndroidStudioProjects/Turkcell-Bitirme-Gezi-Rehberi/app/src/main/res/layout/description_layout.xml" value="0.2441123188405797" />
+        <entry key="..\:/Users/utku/AndroidStudioProjects/Turkcell-Bitirme-Gezi-Rehberi/app/src/main/res/layout/fragment_detail_place.xml" value="0.2" />
+        <entry key="..\:/Users/utku/AndroidStudioProjects/Turkcell-Bitirme-Gezi-Rehberi/app/src/main/res/layout/fragment_travel.xml" value="0.2441123188405797" />
+        <entry key="..\:/Users/utku/AndroidStudioProjects/Turkcell-Bitirme-Gezi-Rehberi/app/src/main/res/layout/item_viewpager_layout.xml" value="0.2441123188405797" />
+        <entry key="..\:/Users/utku/AndroidStudioProjects/Turkcell-Bitirme-Gezi-Rehberi/app/src/main/res/layout/rvc_travel.xml" value="0.1" />
+        <entry key="..\:/Users/utku/AndroidStudioProjects/Turkcell-Bitirme-Gezi-Rehberi/app/src/main/res/layout/slider_viewpager.xml" value="0.2441123188405797" />
       </map>
     </option>
   </component>
@@ -22,7 +28,7 @@
   <component name="VisualizationToolProject">
     <option name="state">
       <ProjectState>
-        <option name="scale" value="0.22" />
+        <option name="scale" value="0.1" />
       </ProjectState>
     </option>
   </component>
