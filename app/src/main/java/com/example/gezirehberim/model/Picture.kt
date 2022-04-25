@@ -11,6 +11,7 @@ class Picture {
     var placeId: Int? = null
     var visitationId: Int? = null
     lateinit var data: String
+    lateinit var date:String
     fun convertImagetoBitmap(): Bitmap {
         val imageBytes = Base64.decode(data, Base64.DEFAULT)
         return BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.size)

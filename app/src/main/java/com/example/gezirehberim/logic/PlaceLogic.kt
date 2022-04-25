@@ -32,9 +32,9 @@ class PlaceLogic {
         }
         fun getPlaceDetail(context: Context, id: Int): Place {
             val place=PlaceOperation(context).getPlace(id)[0]
-            var visitationList=ArrayList<Visitation>()
 
-                visitationList=VisitationOperation(context).getVisitation(id)
+
+               val visitationList=VisitationOperation(context).getVisitation(id)
                 for (visitation in visitationList){
                     visitation.pictureList=PictureOperation(context).getPictures(visitation.id,null)
             }
