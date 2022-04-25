@@ -3,7 +3,7 @@
     <dimen name="margin_18">18dp</dimen>
     <dimen name="margin_13">13dp</dimen>
     <dimen name="margin_5">5dp</dimen>
-    <dimen name="margin_10">10</dimen>
+    <dimen name="margin_10">10dp</dimen>
     <dimen name="margin_12">12dp</dimen>
     <dimen name="margin_14">14dp</dimen>
     <dimen name="margin_8">8dp</dimen>

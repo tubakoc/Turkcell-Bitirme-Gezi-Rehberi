@@ -10,4 +10,7 @@
     <string name="descriptionTextHint">Kısa Açıklama en fazla 3 satır</string>
     <string name="visitHistoryText">Ziyaret Geçmişi</string>
     <string name="edittextInputHint">Girilen açıklama en fazla 3 satır</string>
+
+    <string name="visitedText">Gezdiklerim</string>
+    <string name="toVisitText">Gezilecekler</string>
 </resources>

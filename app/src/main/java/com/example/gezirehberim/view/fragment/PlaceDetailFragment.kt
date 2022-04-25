@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import com.example.gezirehberim.MainActivity.Companion._context
 import com.example.gezirehberim.R
+import com.example.gezirehberim.adapter.SliderViewPagerAdapter
 import com.example.gezirehberim.adapter.ViewPagerAdapter
 import com.example.gezirehberim.constant.Constant
 import com.example.gezirehberim.constant.Constant.Companion.priorities
@@ -26,7 +27,7 @@ class PlaceDetailFragment : Fragment() {
     private val binding get() = _binding!!
     lateinit var place:Place
 
-    var selectedPhoto = 0
+    private var selectedPhoto = 0
 
 
     override fun onCreateView(
@@ -46,17 +47,17 @@ class PlaceDetailFragment : Fragment() {
             //id yolladığımız için tek değer dönecek bu yüzden sıfırıncı indexi aldık direkt
             place=PlaceLogic.getPlaceDetail(_context!!,id)
         }
-       binding.descriptionLayout.textView.text=place
+      /* binding.descriptionLayout.textView.text=place
            .description
         binding.shortDescriptionLayout.textView.text=place.locationDefinition
-        binding.topBar.title.text=place.name
+        binding.topBar.title.text=place.name*/
 
 
         //ekranda deneme amaçlı öncelik değeri gösterir
         binding.priorityDrawable.background = priorities[1]
 
 
-        initializeSlider(place.pictureList)
+        //initializeSlider(place.pictureList)
 
     }
 
@@ -81,7 +82,7 @@ class PlaceDetailFragment : Fragment() {
 //            newPictureList.add(picture.convertImagetoBitmap())
 //        }
 
-        val adapter = ViewPagerAdapter(picturelist)
+        val adapter = SliderViewPagerAdapter(picturelist)
         binding.slider.viewPager.adapter = adapter
         binding.slider.dots.setupWithViewPager(binding.slider.viewPager)
 
