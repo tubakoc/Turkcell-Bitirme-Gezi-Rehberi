@@ -11,8 +11,8 @@ import android.widget.Toast
 import com.example.gezirehberim.MainActivity.Companion._context
 import com.example.gezirehberim.R
 import com.example.gezirehberim.adapter.SliderViewPagerAdapter
-import com.example.gezirehberim.adapter.ViewPagerAdapter
-import com.example.gezirehberim.constant.Constant
+
+
 import com.example.gezirehberim.constant.Constant.Companion.priorities
 import com.example.gezirehberim.constant.Priority
 import com.example.gezirehberim.databinding.FragmentDetailPlaceBinding
