@@ -27,6 +27,7 @@ class PlaceVisitedFragment : Fragment() {
         super.onResume()
 
         //logic veri çek listeye ekle adaptar a bas
+        // listeye  modelden data ekleme adaptar e atama kaldı.
     }
 
     private fun initializeViews() {
