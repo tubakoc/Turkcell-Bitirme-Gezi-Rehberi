@@ -45,7 +45,6 @@ class MainActivity : AppCompatActivity() {
     private fun createViewPager(){
         val adapter = ViewPagerAdapter(this)
 
-        /* BURAYA TUBA'nın EKRANLARI IMPORT EDİLECEK(2 tane gezilecekler ve gezdiklerim)*/
         adapter.fragmentAdd(PlaceVisitFragment())
         adapter.fragmentAdd(PlaceVisitedFragment())
 
