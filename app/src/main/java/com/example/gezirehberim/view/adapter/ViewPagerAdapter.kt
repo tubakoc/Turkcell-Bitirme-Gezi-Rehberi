@@ -1,4 +1,4 @@
-package com.example.gezirehberim.adapter
+package com.example.gezirehberim.view.adapter
 
 import android.annotation.SuppressLint
 import android.content.Context
