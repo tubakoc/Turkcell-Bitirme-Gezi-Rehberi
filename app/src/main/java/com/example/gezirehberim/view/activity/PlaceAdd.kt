@@ -18,9 +18,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
 import com.example.gezirehberim.databinding.ActivityPlaceAddBinding
-import com.example.gezirehberim.logic.PlaceLogic
-import com.example.gezirehberim.model.Picture
-import com.example.gezirehberim.view.adapter.PlacePhotoAdapter
 import java.io.File
 
 class PlaceAdd : AppCompatActivity() {
@@ -28,47 +25,16 @@ class PlaceAdd : AppCompatActivity() {
     private lateinit var binding: ActivityPlaceAddBinding
     private var lat: Double = 0.0
     private var long: Double = 0.0
-    lateinit var geciciResim : PlaceLogic
-    var pictureList = ArrayList<Picture>()
     lateinit var geciciResimUri : Uri
     var uriList = ArrayList<Uri>()
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityPlaceAddBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-       initializeEvents()
-
-    }
-
-    //tıklanma olaylarını bu fun da yazalım
-    private fun initializeEvents()
-    {
         binding.addLocationButton.setOnClickListener(btnClickAddLocation)
 
     }
-
-    private fun setDefault()
-    {
-      //  binding.photoAddRecycler.adapter = PlacePhotoAdapter(this,uriList,::itemClick, ::deletePhotoClick,::addPhotoClick)
-    }
-
-    fun itemClick(i: Int)
-       {
-
-       }
-    fun deletePhotoClick(i: Int)
-    {
-
-    }
-    fun addPhotoClick(i: Int)
-
-    {
-
-    }
-
-
 
     private val btnClickAddLocation = View.OnClickListener {
         goToMapsActivity()
@@ -180,18 +146,19 @@ class PlaceAdd : AppCompatActivity() {
         galeriRl.launch(intent)
     }
 
-    var galeriRl = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
-        if (result.resultCode == RESULT_OK) {
-            uriList.add(result.data!!.data as Uri)
-            listeGuncelle()
-        }
-    }
-
     private fun openCamera() {
         resimDosyasiOlustur()
         val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
         intent.putExtra(MediaStore.EXTRA_OUTPUT, geciciResimUri)
         cameraRl.launch(intent)
+    }
+
+    private fun resimDosyasiOlustur() {
+        val dir = getExternalFilesDir(Environment.DIRECTORY_PICTURES)
+
+        File.createTempFile("resim", ".jpg", dir).apply {
+            geciciResimUri = FileProvider.getUriForFile(this@PlaceAdd, packageName, this)
+        }
     }
 
 
@@ -204,33 +171,16 @@ class PlaceAdd : AppCompatActivity() {
         }
     }
 
-    private fun resimDosyasiOlustur() {
-        val dir = getExternalFilesDir(Environment.DIRECTORY_PICTURES)
+    private fun listeGuncelle() {
+        Toast.makeText(this,"Liste güncellend",Toast.LENGTH_LONG).show()
+    }
 
-        File.createTempFile("resim", ".jpg", dir).apply {
-            geciciResimUri = FileProvider.getUriForFile(this@PlaceAdd, packageName, this)
+
+    var galeriRl = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+        if (result.resultCode == RESULT_OK) {
+            uriList.add(result.data!!.data as Uri)
+            listeGuncelle()
         }
     }
 
-
-
-    private fun listeGuncelle() {
-        binding.photoAddRecycler.adapter!!.notifyDataSetChanged()
-    }
-
-    fun deletePhoto (position :Int)
-    {
-        val adb = AlertDialog.Builder(this)
-        adb.setTitle("Sil")
-            .setMessage("Fotoğraf silinecektir. Onaylıyor musunuz?")
-            .setPositiveButton("Evet") { dialog, which ->
-                uriList.removeAt(position)
-                listeGuncelle()
-            }
-            .setNegativeButton("vazgeç", null)
-            .show()
-    }
-
 }
-
-
