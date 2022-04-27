@@ -43,7 +43,8 @@
             android:background="@android:color/transparent"
             app:tabIndicatorHeight="0dp"
             app:tabRippleColor="@color/global_color"
-            app:tabSelectedTextColor="@color/tab_selector" />
+            app:tabSelectedTextColor="@color/tab_selector"
+            tools:ignore="SpeakableTextPresentCheck" />
 
     </androidx.cardview.widget.CardView>
 
@@ -78,6 +79,7 @@
         app:layout_constraintEnd_toEndOf="@+id/card"
         app:layout_constraintStart_toStartOf="@+id/card"
         app:layout_constraintTop_toTopOf="@+id/card"
-        app:tint="@color/white" />
+        app:tint="@color/white"
+        tools:ignore="SpeakableTextPresentCheck" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
