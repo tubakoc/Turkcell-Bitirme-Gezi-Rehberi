@@ -1,4 +1,4 @@
-package com.example.gezirehberim.view
+package com.example.gezirehberim.view.activity
 
 import android.Manifest
 import android.content.Context
@@ -65,7 +65,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                 MarkerOptions().position(location).title(intent.getStringExtra("locationName"))
             )
             mMap.moveCamera(CameraUpdateFactory.newLatLng(location))
-            binding.btnMapApply.setOnClickListener(btnClickForNavigation)
+            binding.saveButtonLayout.btnMapApply.setOnClickListener(btnClickForNavigation)
 
         } else {
             mMap.isMyLocationEnabled = true

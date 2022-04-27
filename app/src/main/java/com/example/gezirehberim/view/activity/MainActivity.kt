@@ -1,11 +1,13 @@
-package com.example.gezirehberim
+package com.example.gezirehberim.view.activity
 
 import android.annotation.SuppressLint
 import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.example.gezirehberim.R
 import com.example.gezirehberim.databinding.ActivityMainBinding
 import com.example.gezirehberim.databinding.TabLayoutBinding
+import com.example.gezirehberim.databinding.TopBarBinding
 import com.example.gezirehberim.view.adapter.ViewPagerAdapter
 import com.example.gezirehberim.view.fragment.PlaceVisitFragment
 import com.example.gezirehberim.view.fragment.PlaceVisitedFragment
@@ -17,6 +19,8 @@ class MainActivity : AppCompatActivity() {
         //burada global context oluşturma amacımız fonksiyonlarda istenen contexleri her defasında göndermekten tasarruf etmek
         @SuppressLint("StaticFieldLeak")
         var _context: Context? = null
+
+        var topBar: TopBarBinding? = null
     }
 
     private lateinit var binding: ActivityMainBinding
@@ -27,6 +31,9 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         _context = this
+
+        //her sayfada ortak olduğu main activity içerisinde import edip global değişken olarak kullanıyoruz
+        topBar = binding.topBar
 
         createViewPager()
         changeViewPagerOrTabLayout()

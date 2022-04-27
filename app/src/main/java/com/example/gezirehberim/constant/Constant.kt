@@ -4,7 +4,7 @@ import android.graphics.drawable.ShapeDrawable
 import android.graphics.drawable.shapes.RoundRectShape
 import android.os.Build
 import androidx.annotation.ColorRes
-import com.example.gezirehberim.MainActivity.Companion._context
+import com.example.gezirehberim.view.activity.MainActivity.Companion._context
 import com.example.gezirehberim.R
 
 
@@ -13,7 +13,8 @@ class Constant {
 
     companion object {
 
-
+        const val TO_BE_VISITED_LIST_ID=0
+        const val VISITED_LIST_ID=1
         val priorities = Priority.getPriorities()
 
 

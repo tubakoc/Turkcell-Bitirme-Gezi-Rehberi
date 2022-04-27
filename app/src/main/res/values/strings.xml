@@ -5,6 +5,7 @@
     <string name="visitText">Ziyaret Ekle</string>
     <string name="shortDescriptionText">Yer Kısa Tanım</string>
     <string name="buttonLocationShowText">Konum Göster</string>
+    <string name="buttonLocationAddText">Konum Ekle</string>
     <string name="shortDescriptionTextHint">Yer kısa tanım bilgisi</string>
     <string name="descriptionText">Kısa Açıklama</string>
     <string name="descriptionTextHint">Kısa Açıklama en fazla 3 satır</string>
@@ -13,4 +14,6 @@
 
     <string name="visitedText">Gezdiklerim</string>
     <string name="toVisitText">Gezilecekler</string>
+    <string name="title_activity_maps">Harita</string>
+    <string name="saveText">Kaydet</string>
 </resources>

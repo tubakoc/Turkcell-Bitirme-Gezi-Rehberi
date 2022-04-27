@@ -6,12 +6,13 @@ import com.example.gezirehberim.DAL.PlaceOperation
 import com.example.gezirehberim.DAL.VisitationOperation
 import com.example.gezirehberim.model.Place
 import com.example.gezirehberim.model.Visitation
+import com.example.gezirehberim.view.activity.MainActivity.Companion._context
 
 class PlaceLogic {
     companion object {
-        fun addPlace(context: Context, place: Place): Long {
-            val placeOperation = PlaceOperation(context)
-            val pictureOperation = PictureOperation(context)
+        fun addPlace( place: Place): Long {
+            val placeOperation = PlaceOperation(_context!!)
+            val pictureOperation = PictureOperation(_context!!)
             val id = placeOperation.addPlace(place)
             for (picture in place.pictureList) {
                 picture.placeId = id.toInt()
@@ -23,27 +24,29 @@ class PlaceLogic {
             return id
         }
 
-        fun getPlaceList(context: Context): ArrayList<Place> {
-            val list=PlaceOperation(context).getPlace(null)
+        fun getPlaceList(isVisited: Int): ArrayList<Place> {
+            var list=PlaceOperation(_context!!).getPlace(null)
+            // gezdiklerim ve gezilecekler için filtreleme(bu sorgu direk veritabanı tarafında yapılsa daha iyi olur)
+            list = list.filter { it.isVisited == isVisited } as ArrayList<Place>
             for(place in list){
-                place.pictureList=PictureOperation(context).getPictures(null,place.id)
+                place.pictureList=PictureOperation(_context!!).getPictures(null,place.id)
             }
             return list
         }
-        fun setVisit(context: Context,place: Place){
+        fun setVisit(place: Place){
             if(place.isVisited==0){
-                val placeOperation=PlaceOperation(context)
+                val placeOperation=PlaceOperation(_context!!)
                 placeOperation.setVisit(place.id,1)
             }
 
         }
-        fun getPlaceDetail(context: Context, id: Int): Place {
-            val place=PlaceOperation(context).getPlace(id)[0]
+        fun getPlaceDetail( id: Int): Place {
+            val place=PlaceOperation(_context!!).getPlace(id)[0]
 
 
-               val visitationList=VisitationOperation(context).getVisitation(id)
+               val visitationList=VisitationOperation(_context!!).getVisitation(id)
                 for (visitation in visitationList){
-                    visitation.pictureList=PictureOperation(context).getPictures(visitation.id,null)
+                    visitation.pictureList=PictureOperation(_context!!).getPictures(visitation.id,null)
             }
             place.visitationList=visitationList
             return place

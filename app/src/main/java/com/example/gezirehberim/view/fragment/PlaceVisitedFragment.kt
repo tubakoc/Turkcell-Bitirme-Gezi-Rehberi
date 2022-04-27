@@ -6,33 +6,50 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.gezirehberim.R
+import com.example.gezirehberim.constant.Constant
 import com.example.gezirehberim.databinding.FragmentTravelBinding
+import com.example.gezirehberim.logic.PlaceLogic
 import com.example.gezirehberim.model.Place
+import com.example.gezirehberim.view.activity.MainActivity
 
 class PlaceVisitedFragment : Fragment() {
-    lateinit var binding : FragmentTravelBinding
-    lateinit var list : ArrayList<Place>
+    private var _binding: FragmentTravelBinding? = null
+    private lateinit var list: ArrayList<Place>
+    private val binding get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        binding = FragmentTravelBinding.inflate(inflater)
-        initializeViews()
+    ): View {
+        _binding = FragmentTravelBinding.inflate(inflater)
         return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
     }
 
     override fun onResume() {
         super.onResume()
 
+        MainActivity.topBar?.title?.text = getString(R.string.visitedText)
+        getVisited()
+
         //logic veri çek listeye ekle adaptar a bas
         // listeye  modelden data ekleme adaptar e atama kaldı.
     }
 
-    private fun initializeViews() {
-        val lm = LinearLayoutManager(requireActivity())
-        lm.orientation = LinearLayoutManager.VERTICAL
-        binding.rvTravel.layoutManager = lm
+    private fun getVisited() {
+
+        val visitedList = PlaceLogic.getPlaceList(Constant.VISITED_LIST_ID)
+
+        // adapter sınıfı yazılacak olup burdaki recycler view'a gelen veri yollanacak
+        //binding.rvTravel.adapter=adapter
+
+
     }
+
+
 }

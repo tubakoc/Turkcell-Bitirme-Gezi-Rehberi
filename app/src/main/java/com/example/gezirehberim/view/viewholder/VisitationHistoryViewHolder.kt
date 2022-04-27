@@ -15,7 +15,7 @@ class VisitationHistoryViewHolder(itemView : View) : RecyclerView.ViewHolder(ite
     var visitationDate: TextView
     init {
         visitationDescription = itemView.findViewById(R.id.descriptionTextview)
-        visitationDate = itemView.findViewById(R.id.textView)
+        visitationDate = itemView.findViewById(R.id.header)
 
 
 

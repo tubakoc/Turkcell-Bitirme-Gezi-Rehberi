@@ -7,7 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.viewpager.widget.PagerAdapter
-import com.example.gezirehberim.MainActivity.Companion._context
+import com.example.gezirehberim.view.activity.MainActivity.Companion._context
 import com.example.gezirehberim.constant.convertImagetoBitmap
 import com.example.gezirehberim.model.Picture
 

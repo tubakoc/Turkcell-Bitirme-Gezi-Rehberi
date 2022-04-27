@@ -18,33 +18,13 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0"
-        tools:context=".view.MapsActivity" />
+        tools:context=".view.activity.MapsActivity" />
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btnMapApply"
-        android:layout_width="0dp"
-        android:layout_height="50dp"
-        android:layout_marginBottom="25dp"
-        android:text="Kaydet"
-        android:textColor="@color/white"
-        android:background="@drawable/bg_add_visit"
-        android:elevation="5dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/guideline3"
-        app:layout_constraintStart_toStartOf="@+id/guideline2">
-
-    </androidx.appcompat.widget.AppCompatButton>
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline2"
-        android:layout_width="wrap_content"
+    <include
+        android:id="@+id/saveButtonLayout"
+        layout="@layout/save_button"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.13" />
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.87" />
+        app:layout_constraintBottom_toBottomOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

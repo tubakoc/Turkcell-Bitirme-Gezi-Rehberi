@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/global_background"
+    tools:context=".view.activity.PlaceAdd">
+
+    <include
+        android:id="@+id/topBar"
+        layout="@layout/top_bar" />
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/saveButtonLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/topBar">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="@dimen/margin_18">
+
+
+            <androidx.recyclerview.widget.RecyclerView
+                tools:listitem="@layout/photo_add_design"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                android:id="@+id/photoAddRecycler"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:visibility="gone"
+                android:layout_marginTop="@dimen/margin_15"
+                android:id="@+id/addLocationButton"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/margin_25"
+                android:background="@drawable/bg_add_visit"
+                android:text="@string/buttonLocationAddText"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:textSize="10sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/photoAddRecycler" />
+
+
+            <Spinner
+                android:visibility="gone"
+                android:layout_marginTop="@dimen/margin_13"
+                android:id="@+id/prioritySpinner"
+                android:layout_width="match_parent"
+                android:layout_height="24dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/addLocationButton" />
+
+            <include
+                android:layout_marginTop="@dimen/margin_13"
+                android:id="@+id/visitDate"
+                layout="@layout/short_description_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@+id/prioritySpinner"
+                 />
+
+            <include
+                android:visibility="gone"
+                android:layout_marginTop="@dimen/margin_13"
+                android:id="@+id/placeShortDescription"
+                layout="@layout/short_description_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@+id/visitDate"
+                 />
+
+            <include
+                android:id="@+id/visitDescription"
+                layout="@layout/description_layout"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:layout_marginTop="@dimen/margin_13"
+                app:layout_constraintTop_toBottomOf="@+id/placeShortDescription" />
+
+
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+
+    <include
+        android:id="@+id/saveButtonLayout"
+        layout="@layout/save_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

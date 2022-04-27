@@ -2,7 +2,6 @@ package com.example.gezirehberim.view.fragment
 
 import android.content.Context
 import android.content.Intent
-import android.graphics.Bitmap
 import android.net.ConnectivityManager
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -10,19 +9,17 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import com.example.gezirehberim.MainActivity.Companion._context
-import com.example.gezirehberim.R
+import com.example.gezirehberim.view.activity.MainActivity.Companion._context
 import com.example.gezirehberim.adapter.SliderViewPagerAdapter
 
 
 import com.example.gezirehberim.constant.Constant.Companion.priorities
-import com.example.gezirehberim.constant.Priority
 import com.example.gezirehberim.constant.checkInternetConnection
 import com.example.gezirehberim.databinding.FragmentDetailPlaceBinding
 import com.example.gezirehberim.logic.PlaceLogic
 import com.example.gezirehberim.model.Picture
 import com.example.gezirehberim.model.Place
-import com.example.gezirehberim.view.MapsActivity
+import com.example.gezirehberim.view.activity.MapsActivity
 import com.google.android.material.tabs.TabLayout
 
 class PlaceDetailFragment : Fragment() {
@@ -49,7 +46,7 @@ class PlaceDetailFragment : Fragment() {
         val id=arguments?.getInt("id")
         if(id!=null){
             //id yolladığımız için tek değer dönecek bu yüzden sıfırıncı indexi aldık direkt
-            place=PlaceLogic.getPlaceDetail(_context!!,id)
+            place=PlaceLogic.getPlaceDetail(id)
         }
         /*
        binding.descriptionLayout.descriptionTextview.text=place.description
@@ -69,7 +66,7 @@ class PlaceDetailFragment : Fragment() {
 
         }
         else{
-           val intent=Intent(requireContext(),MapsActivity::class.java)
+           val intent=Intent(requireContext(), MapsActivity::class.java)
             intent.putExtra("lat",place.latitude)
             intent.putExtra("long",place.longitude)
             intent.putExtra("locationName",place
