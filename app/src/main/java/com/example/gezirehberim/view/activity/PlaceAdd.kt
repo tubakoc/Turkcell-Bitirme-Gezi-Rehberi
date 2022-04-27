@@ -18,6 +18,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
 import com.example.gezirehberim.databinding.ActivityPlaceAddBinding
+import com.example.gezirehberim.view.adapter.PlacePhotoAdapter
 import java.io.File
 
 class PlaceAdd : AppCompatActivity() {
@@ -29,12 +30,53 @@ class PlaceAdd : AppCompatActivity() {
     var uriList = ArrayList<Uri>()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+
+        initializeViews()
+        initializeEvents()
+        setDefaults()
+
+
+
+    }
+
+
+    private fun initializeViews() {
         binding = ActivityPlaceAddBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+    }
+
+    //tıklama olayları
+    private fun initializeEvents() {
+
         binding.addLocationButton.setOnClickListener(btnClickAddLocation)
+    }
+
+    private fun setDefaults()
+    {
+
+       // binding.photoAddRecycler.adapter = PlacePhotoAdapter(this, uriList, ::itemClick, ::deletePhotoClick,::addPhotoClick)
 
     }
+
+
+    fun deletePhotoClick(position: Int) {
+        PhotoDelete(position)
+
+    }
+
+
+    fun itemClick(position: Int) {
+
+        //tam ekranda photo görüntüle
+    }
+
+
+    fun addPhotoClick(position: Int) {
+        addPhoto(position)
+    }
+
 
     private val btnClickAddLocation = View.OnClickListener {
         goToMapsActivity()
@@ -183,4 +225,16 @@ class PlaceAdd : AppCompatActivity() {
         }
     }
 
+    fun PhotoDelete(position : Int)
+    {
+        //modelden delete fonk çekilecek
+    }
+
+    fun addPhoto(position: Int)
+    {
+
+    }
+
 }
+
+

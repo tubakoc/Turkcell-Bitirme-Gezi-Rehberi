@@ -32,5 +32,6 @@ class PlacePhotoViewHolder(itemView : View, itemClick : ((position : Int)->Unit)
     fun bindData(context: Context,picture: Picture) {
         //  Model oluşturulduktan sonra atama işlemleri yapılacak priority traveldate image eklenecek
 
+        //photo.setImageURI(uri)
     }
 }
