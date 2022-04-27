@@ -22,6 +22,12 @@ class PlacePhotoViewHolder(itemView : View, itemClick : ((position : Int)->Unit)
         itemView.setOnClickListener {
             itemClick(adapterPosition)
         }
+        removeButton.setOnClickListener {
+            itemClick(adapterPosition)
+        }
+        addPhoto.setOnClickListener {
+            itemClick(adapterPosition)
+        }
     }
 
     fun bindData(context : Context, place : Place) {
