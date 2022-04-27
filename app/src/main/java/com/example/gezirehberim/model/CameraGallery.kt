@@ -66,7 +66,6 @@ object CameraGallery{
 
 
 
-
     fun selectSource(context : Context) {
         val adb = AlertDialog.Builder(context)
         adb.setTitle("Kaynak Seç")
