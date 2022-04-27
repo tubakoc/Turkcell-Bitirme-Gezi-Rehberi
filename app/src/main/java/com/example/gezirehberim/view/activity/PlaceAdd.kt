@@ -75,7 +75,7 @@ class PlaceAdd : AppCompatActivity() {
 
     private fun goToMapsActivity() {
         val intent = Intent(this, MapsActivity::class.java)
-        // intent.putExtra("product", productList.get(position))
+
         resultLauncher.launch(intent)
     }
     private var resultLauncher = registerForActivityResult(
