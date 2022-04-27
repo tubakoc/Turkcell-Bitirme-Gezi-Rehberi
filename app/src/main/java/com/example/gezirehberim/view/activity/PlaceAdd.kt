@@ -30,16 +30,11 @@ class PlaceAdd : AppCompatActivity() {
     var uriList = ArrayList<Uri>()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-
         initializeViews()
         initializeEvents()
         setDefaults()
 
-
-
     }
-
 
     private fun initializeViews() {
         binding = ActivityPlaceAddBinding.inflate(layoutInflater)
@@ -56,7 +51,7 @@ class PlaceAdd : AppCompatActivity() {
     private fun setDefaults()
     {
 
-       // binding.photoAddRecycler.adapter = PlacePhotoAdapter(this, uriList, ::itemClick, ::deletePhotoClick,::addPhotoClick)
+       binding.photoAddRecycler.adapter = PlacePhotoAdapter(this, uriList, null, ::deletePhotoClick,::addPhotoClick)
 
     }
 
@@ -66,11 +61,6 @@ class PlaceAdd : AppCompatActivity() {
 
     }
 
-
-    fun itemClick(position: Int) {
-
-        //tam ekranda photo görüntüle
-    }
 
 
     fun addPhotoClick(position: Int) {
@@ -232,7 +222,7 @@ class PlaceAdd : AppCompatActivity() {
 
     fun addPhoto(position: Int)
     {
-
+        cameraPermissionControl()
     }
 
 }
