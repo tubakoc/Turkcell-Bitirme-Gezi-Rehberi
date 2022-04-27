@@ -16,4 +16,5 @@
     <string name="toVisitText">Gezilecekler</string>
     <string name="title_activity_maps">Harita</string>
     <string name="saveText">Kaydet</string>
+    <string name="MAPS_API_KEY">AIzaSyB1I9ufV60yaUFcCHLsOYbtwWGT95VoEnE</string>
 </resources>
