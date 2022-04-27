@@ -4,7 +4,10 @@ import android.Manifest
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.graphics.Bitmap
+import android.graphics.ImageDecoder
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.os.Environment
 import android.provider.MediaStore
@@ -17,7 +20,9 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
+import com.example.gezirehberim.constant.convertBitmaptoBase64
 import com.example.gezirehberim.databinding.ActivityPlaceAddBinding
+import com.example.gezirehberim.model.Picture
 import java.io.File
 
 class PlaceAdd : AppCompatActivity() {
@@ -25,7 +30,7 @@ class PlaceAdd : AppCompatActivity() {
     private lateinit var binding: ActivityPlaceAddBinding
     private var lat: Double = 0.0
     private var long: Double = 0.0
-    lateinit var geciciResimUri : Uri
+    lateinit var geciciResimUri: Uri
     var uriList = ArrayList<Uri>()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,9 +48,9 @@ class PlaceAdd : AppCompatActivity() {
 
     private fun goToMapsActivity() {
         val intent = Intent(this, MapsActivity::class.java)
-        // intent.putExtra("product", productList.get(position))
         resultLauncher.launch(intent)
     }
+
     private var resultLauncher = registerForActivityResult(
         ActivityResultContracts.StartActivityForResult(),
         ::getLocationResult
@@ -54,13 +59,16 @@ class PlaceAdd : AppCompatActivity() {
     private fun getLocationResult(result: ActivityResult) {
 
         if (result.resultCode == RESULT_OK) {
-        //konum alındı
-            lat = result.data?.getDoubleExtra("lat",361.0)!!
-            long = result.data?.getDoubleExtra("lat",361.0)!!
-            if (lat==361.0||long==361.0) {
-               Toast.makeText(this,"Konum ekleme işlemi başarısız oldu lütfen tekrar deneyiniz.",Toast.LENGTH_LONG).show()
-            }
-            else{
+            //konum alındı
+            lat = result.data?.getDoubleExtra("lat", 361.0)!!
+            long = result.data?.getDoubleExtra("lat", 361.0)!!
+            if (lat == 361.0 || long == 361.0) {
+                Toast.makeText(
+                    this,
+                    "Konum ekleme işlemi başarısız oldu lütfen tekrar deneyiniz.",
+                    Toast.LENGTH_LONG
+                ).show()
+            } else {
                 Log.d("konum", "$lat  $long")
             }
 
@@ -69,39 +77,41 @@ class PlaceAdd : AppCompatActivity() {
 
 
     @SuppressLint("NewApi")
-    fun cameraPermissionControl()
-    {
+    fun cameraPermissionControl() {
         val requestList = ArrayList<String>()
 
-        var permissionStatus =  ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED
+        var permissionStatus = ContextCompat.checkSelfPermission(
+            this,
+            Manifest.permission.CAMERA
+        ) == PackageManager.PERMISSION_GRANTED
 
-        if (!permissionStatus)
-        {
+        if (!permissionStatus) {
             requestList.add(Manifest.permission.CAMERA)
         }
 
-        permissionStatus = ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED
+        permissionStatus = ContextCompat.checkSelfPermission(
+            this,
+            Manifest.permission.WRITE_EXTERNAL_STORAGE
+        ) == PackageManager.PERMISSION_GRANTED
 
-        if (!permissionStatus)
-        {
+        if (!permissionStatus) {
             requestList.add(Manifest.permission.WRITE_EXTERNAL_STORAGE)
         }
 
-        permissionStatus = ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED
+        permissionStatus = ContextCompat.checkSelfPermission(
+            this,
+            Manifest.permission.READ_EXTERNAL_STORAGE
+        ) == PackageManager.PERMISSION_GRANTED
 
 
-        if (!permissionStatus)
-        {
+        if (!permissionStatus) {
             requestList.add(Manifest.permission.READ_EXTERNAL_STORAGE)
         }
 
-        if (requestList.size == 0)
-        {
+        if (requestList.size == 0) {
             selectSource()
-        }
-        else
-        {
-              requestPermissions(requestList.toTypedArray(),0)
+        } else {
+            requestPermissions(requestList.toTypedArray(), 0)
         }
     }
 
@@ -112,10 +122,8 @@ class PlaceAdd : AppCompatActivity() {
     ) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
 
-        for (gr in grantResults)
-        {
-            if (gr != PackageManager.PERMISSION_GRANTED)
-            {
+        for (gr in grantResults) {
+            if (gr != PackageManager.PERMISSION_GRANTED) {
                 Toast.makeText(this, "İzinlerin tümü verilmedi", Toast.LENGTH_LONG).show()
 
                 return
@@ -162,25 +170,41 @@ class PlaceAdd : AppCompatActivity() {
     }
 
 
-    var cameraRl= registerForActivityResult(ActivityResultContracts.StartActivityForResult())
+    var cameraRl = registerForActivityResult(ActivityResultContracts.StartActivityForResult())
     {
-        if (it.resultCode == RESULT_OK)
-        {
+        if (it.resultCode == RESULT_OK) {
             uriList.add(geciciResimUri)
             listeGuncelle()
         }
     }
 
     private fun listeGuncelle() {
-        Toast.makeText(this,"Liste güncellend",Toast.LENGTH_LONG).show()
+        Toast.makeText(this, "Liste güncellend", Toast.LENGTH_LONG).show()
     }
 
 
-    var galeriRl = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
-        if (result.resultCode == RESULT_OK) {
-            uriList.add(result.data!!.data as Uri)
-            listeGuncelle()
+    var galeriRl =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            if (result.resultCode == RESULT_OK) {
+                uriList.add(result.data!!.data as Uri)
+                val piture = Picture()
+                piture.id = 0
+                piture.data = convertBitmaptoBase64(getCapturedImage(uriList[0]))
+                listeGuncelle()
+            }
         }
-    }
 
+    private fun getCapturedImage(selectedPhotoUri: Uri): Bitmap {
+        val bitmap = when {
+            Build.VERSION.SDK_INT < 28 -> MediaStore.Images.Media.getBitmap(
+                this.contentResolver,
+                selectedPhotoUri
+            )
+            else -> {
+                val source = ImageDecoder.createSource(this.contentResolver, selectedPhotoUri)
+                ImageDecoder.decodeBitmap(source)
+            }
+        }
+return bitmap
+    }
 }
