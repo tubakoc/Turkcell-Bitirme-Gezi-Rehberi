@@ -11,7 +11,7 @@ import com.example.gezirehberim.model.Visitation
 
 class VisitationHistoryViewHolder(itemView : View) : RecyclerView.ViewHolder(itemView) {
 
-    var visitationDescription: EditText
+    var visitationDescription: TextView
     var visitationDate: TextView
     init {
         visitationDescription = itemView.findViewById(R.id.descriptionTextview)
@@ -21,8 +21,8 @@ class VisitationHistoryViewHolder(itemView : View) : RecyclerView.ViewHolder(ite
 
     }
     fun bindData(context : Context, visitation: Visitation) {
-        visitationDescription.setText(visitation.description)
-        visitationDescription.isEnabled=false
+        visitationDescription.text = visitation.description
+
         visitationDate.text = visitation.date
 
     }

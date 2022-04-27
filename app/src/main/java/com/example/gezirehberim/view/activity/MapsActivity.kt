@@ -11,7 +11,6 @@ import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.example.gezirehberim.R
@@ -35,6 +34,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
     private var locationName: String? = null
     private var locationManager: LocationManager? = null
     private var locationListener: LocationListener? = null
+    private var lastLatLang:LatLng?=null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -69,6 +69,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
         } else {
             mMap.isMyLocationEnabled = true
+            binding.saveButtonLayout.btnMapApply.setOnClickListener(btnClickForNavigation)
             locationManager = getSystemService(Context.LOCATION_SERVICE) as LocationManager
             locationListener = LocationListener { p0 ->
                 val currentLocation = LatLng(p0.latitude, p0.longitude)
@@ -107,9 +108,9 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                 val lastlocation =
                     locationManager!!.getLastKnownLocation(LocationManager.GPS_PROVIDER)
                 if (lastlocation != null) {
-                    val lastlatlag = LatLng(lastlocation.latitude, lastlocation.longitude)
-                    mMap.addMarker(MarkerOptions().position(lastlatlag).title("Konumunuz"))
-                    mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(lastlatlag, 16f))
+                    lastLatLang = LatLng(lastlocation.latitude, lastlocation.longitude)
+                    mMap.addMarker(MarkerOptions().position(lastLatLang).title("Konumunuz"))
+                    mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(lastLatLang, 16f))
                 }
             }
 
@@ -120,6 +121,9 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
     private val btnClickForNavigation = View.OnClickListener {
         openGoogleMapsNavigation(this, lat!!, long!!)
+    }
+    private val btnClickForAddPlace = View.OnClickListener {
+        backToAddPlacePage(lastLatLang)
     }
 
     private fun openGoogleMapsNavigation(
@@ -140,26 +144,33 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
     private val longClickListener = GoogleMap.OnMapLongClickListener { p0 ->
         mMap.clear()
-        val geocoder = Geocoder(this@MapsActivity, Locale.getDefault())
-        if (p0 !== null) {
-            try {
-                val list = geocoder.getFromLocation(p0.latitude, p0.longitude, 1)
-                if (list.size > 0) {
-                    val lastlatlag = LatLng(list[0].latitude, list[0].longitude)
-                    mMap.addMarker(MarkerOptions().position(lastlatlag).title("Seçilen Konum"))
 
-                    Toast.makeText(applicationContext, list[0]!!.featureName, Toast.LENGTH_LONG)
-                        .show()
-                    mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(lastlatlag, 16f))
-                }
+
+
+            try {
+
+                    lastLatLang = LatLng(p0.latitude, p0.longitude)
+                    mMap.addMarker(MarkerOptions().position(lastLatLang!!).title("Seçilen Konum"))
+
+                    mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(lastLatLang!!, 16f))
+
             } catch (e: Exception) {
                 e.printStackTrace()
 
             }
         }
+    private fun backToAddPlacePage(lastLatLang: LatLng?) {
+        val intent = Intent()
+
+        intent.putExtra("lat", lastLatLang?.latitude)
+        intent.putExtra("long",lastLatLang?.longitude)
+
+        setResult(RESULT_OK, intent)
+        finish()
+    }
     }
 
 
-}
+
 
 

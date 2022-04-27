@@ -38,7 +38,7 @@
 
 
             <androidx.appcompat.widget.AppCompatButton
-                android:visibility="gone"
+                android:visibility="visible"
                 android:layout_marginTop="@dimen/margin_15"
                 android:id="@+id/addLocationButton"
                 android:layout_width="wrap_content"
@@ -53,7 +53,7 @@
 
 
             <Spinner
-                android:visibility="gone"
+                android:visibility="visible"
                 android:layout_marginTop="@dimen/margin_13"
                 android:id="@+id/prioritySpinner"
                 android:layout_width="match_parent"

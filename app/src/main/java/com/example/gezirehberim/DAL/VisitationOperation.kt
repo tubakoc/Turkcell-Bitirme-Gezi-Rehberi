@@ -71,19 +71,19 @@ class VisitationOperation(context: Context) {
         return visitationDatabase!!.rawQuery(query, null)
     }
 
-    private fun getVisitationById(id: Int): Cursor {
-        val query = "Select * from $TABLENAME where Id=?"
-        return visitationDatabase!!.rawQuery(query, arrayOf(id.toString()))
+    private fun getVisitationByPlaceId(placeId: Int): Cursor {
+        val query = "Select * from $TABLENAME where PlaceId=?"
+        return visitationDatabase!!.rawQuery(query, arrayOf(placeId.toString()))
     }
 
 
     @SuppressLint("Range")
-    fun getVisitation(id: Int?): ArrayList<Visitation> {
+    fun getVisitation(placeId: Int?): ArrayList<Visitation> {
         open()
         val visitationList = ArrayList<Visitation>()
         val visitation = Visitation()
-        val cursor: Cursor = if (id != null) {
-            getVisitationById(id)
+        val cursor: Cursor = if (placeId != null) {
+            getVisitationByPlaceId(placeId)
         } else {
             getAllVisitations()
         }

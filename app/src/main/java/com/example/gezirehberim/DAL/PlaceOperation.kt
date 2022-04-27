@@ -95,9 +95,9 @@ class PlaceOperation(context: Context) {
         placeDatabase!!.delete(TABLENAME, "Id = ?", arrayOf(id.toString()))
         close()
     }
-    private fun getAllPlaces(): Cursor {
-        val query = "Select * from $TABLENAME"
-        return placeDatabase!!.rawQuery(query, null)
+    private fun getAllPlaces(isVisited:Int): Cursor {
+        val query = "Select * from $TABLENAME where IsVisited=?"
+        return placeDatabase!!.rawQuery(query, arrayOf(isVisited.toString()))
     }
 
     private fun getPlaceById(id: Int): Cursor {
@@ -107,14 +107,14 @@ class PlaceOperation(context: Context) {
 
 
     @SuppressLint("Range")
-    fun getPlace(id: Int?): ArrayList<Place> {
+    fun getPlace(id: Int?,isVisited:Int?): ArrayList<Place> {
         open()
         val placeList = ArrayList<Place>()
         val place = Place()
         val cursor: Cursor = if (id != null) {
             getPlaceById(id)
         } else {
-            getAllPlaces()
+            getAllPlaces(isVisited!!)
         }
 
 

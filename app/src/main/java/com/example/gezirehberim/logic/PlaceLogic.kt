@@ -25,9 +25,8 @@ class PlaceLogic {
         }
 
         fun getPlaceList(isVisited: Int): ArrayList<Place> {
-            var list=PlaceOperation(_context!!).getPlace(null)
-            // gezdiklerim ve gezilecekler için filtreleme(bu sorgu direk veritabanı tarafında yapılsa daha iyi olur)
-            list = list.filter { it.isVisited == isVisited } as ArrayList<Place>
+            var list=PlaceOperation(_context!!).getPlace(null,isVisited)
+
             for(place in list){
                 place.pictureList=PictureOperation(_context!!).getPictures(null,place.id)
             }
@@ -41,7 +40,7 @@ class PlaceLogic {
 
         }
         fun getPlaceDetail( id: Int): Place {
-            val place=PlaceOperation(_context!!).getPlace(id)[0]
+            val place=PlaceOperation(_context!!).getPlace(id,null)[0]
 
 
                val visitationList=VisitationOperation(_context!!).getVisitation(id)
