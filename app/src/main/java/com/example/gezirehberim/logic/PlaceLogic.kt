@@ -30,6 +30,13 @@ class PlaceLogic {
             }
             return list
         }
+        fun setVisit(context: Context,place: Place){
+            if(place.isVisited==0){
+                val placeOperation=PlaceOperation(context)
+                placeOperation.setVisit(place.id,1)
+            }
+
+        }
         fun getPlaceDetail(context: Context, id: Int): Place {
             val place=PlaceOperation(context).getPlace(id)[0]
 

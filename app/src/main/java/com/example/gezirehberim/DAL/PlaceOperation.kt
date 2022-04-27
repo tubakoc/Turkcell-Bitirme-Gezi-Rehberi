@@ -35,8 +35,19 @@ class PlaceOperation(context: Context) {
             placeDatabase!!.close()
         }
     }
-    fun getLastInsertedId(){
+    fun setVisit(id: Int,visited:Int){
+        val contentValues = ContentValues()
 
+        contentValues.put(ISVISITED,visited)
+
+        open()
+        placeDatabase!!.update(
+            TABLENAME,
+            contentValues,
+            "Id = ?",
+            arrayOf(id.toString())
+        )
+        close()
 
     }
     fun addPlace(place: Place): Long {

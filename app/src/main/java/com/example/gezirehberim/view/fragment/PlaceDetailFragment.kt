@@ -1,7 +1,9 @@
 package com.example.gezirehberim.view.fragment
 
+import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
+import android.net.ConnectivityManager
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -15,10 +17,12 @@ import com.example.gezirehberim.adapter.SliderViewPagerAdapter
 
 import com.example.gezirehberim.constant.Constant.Companion.priorities
 import com.example.gezirehberim.constant.Priority
+import com.example.gezirehberim.constant.checkInternetConnection
 import com.example.gezirehberim.databinding.FragmentDetailPlaceBinding
 import com.example.gezirehberim.logic.PlaceLogic
 import com.example.gezirehberim.model.Picture
 import com.example.gezirehberim.model.Place
+import com.example.gezirehberim.view.MapsActivity
 import com.google.android.material.tabs.TabLayout
 
 class PlaceDetailFragment : Fragment() {
@@ -56,11 +60,28 @@ class PlaceDetailFragment : Fragment() {
 
         //ekranda deneme amaçlı öncelik değeri gösterir
         binding.priorityDrawable.background = priorities[1]
+        val cm = requireContext().getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        if (!checkInternetConnection(cm))
+        {
 
+            Toast.makeText(context, "Lütfen Internet bağlantınızı kontrol ediniz", Toast.LENGTH_LONG).show()
+
+
+        }
+        else{
+           val intent=Intent(requireContext(),MapsActivity::class.java)
+            intent.putExtra("lat",place.latitude)
+            intent.putExtra("long",place.longitude)
+            intent.putExtra("locationName",place
+                .name)
+            requireActivity().startActivity(intent)
+            requireActivity().finish()
+        }
 
         //initializeSlider(place.pictureList)
 
     }
+
 
 
     private fun initializeSlider(picturelist:ArrayList<Picture>) {
