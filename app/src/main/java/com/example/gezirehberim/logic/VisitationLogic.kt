@@ -17,6 +17,8 @@ class VisitationLogic {
         fun addVisitation( visitation: Visitation): Long {
             val visitationOperation = VisitationOperation(MainActivity._context!!)
             val pictureOperation = PictureOperation(MainActivity._context!!)
+            PlaceLogic.setVisit(visitation.placeId)
+
             val id = visitationOperation.addVisitation(visitation)
             GlobalScope.launch {
                 for (picture in visitation.pictureList) {

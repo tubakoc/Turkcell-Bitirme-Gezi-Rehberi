@@ -68,7 +68,7 @@ class PlaceDetailFragment : Fragment() {
         binding.descriptionLayout.descriptionTextview.text = place
             .description
         //ekranda deneme amaçlı öncelik değeri gösterir
-        binding.priorityDrawable.background = priorities[1]
+        binding.priorityDrawable.background = priorities[place.priority.ordinal]
 
         initializeSlider(PictureLogic.returnPicturesForSlider(place))
     }

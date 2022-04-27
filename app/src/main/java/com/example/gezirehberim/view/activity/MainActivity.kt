@@ -2,6 +2,7 @@ package com.example.gezirehberim.view.activity
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.gezirehberim.R
@@ -39,6 +40,7 @@ class MainActivity : AppCompatActivity() {
         changeViewPagerOrTabLayout()
         createTab()
         //tıklama olayları
+
         setOnClickListeners()
         splashGoster()
 

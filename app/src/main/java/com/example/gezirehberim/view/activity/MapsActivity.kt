@@ -58,38 +58,43 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
     override fun onMapReady(googleMap: GoogleMap) {
         mMap = googleMap
         mMap.uiSettings.isZoomControlsEnabled = true
+
         //location name detay ekranından geldiği için sadece onu kontrol etsek yeterli
-        if (lat!=361.0&&long!=361.0) {
+        if (lat==361.0||long==361.0) {
             val location = LatLng(lat!!, long!!)
+          //  mMap.isMyLocationEnabled = true
             mMap.addMarker(
                 MarkerOptions().position(location).title(intent.getStringExtra("locationName"))
             )
+
             mMap.moveCamera(CameraUpdateFactory.newLatLng(location))
-            binding.saveButtonLayout.btnMapApply.setOnClickListener(btnClickForNavigation)
+            binding.saveButtonLayout.btnMapApply.text="Kaydet"
+            binding.saveButtonLayout.btnMapApply.setOnClickListener(btnClickForAddPlace)
 
         } else {
-            mMap.isMyLocationEnabled = true
+
             binding.saveButtonLayout.btnMapApply.setOnClickListener(btnClickForNavigation)
+            binding.saveButtonLayout.btnMapApply.text="Git"
             locationManager = getSystemService(Context.LOCATION_SERVICE) as LocationManager
-            locationListener = LocationListener { p0 ->
-                val currentLocation = LatLng(p0.latitude, p0.longitude)
-                mMap.clear()
-                mMap.addMarker(MarkerOptions().position(currentLocation).title("Konumunuz"))
-                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(currentLocation, 16f))
-                //lokasyon veya konum değişince nele ryapılacak
-                val geocoder = Geocoder(this@MapsActivity, Locale.getDefault())
-
-                try {
-                    val locationlist = geocoder.getFromLocation(p0.latitude, p0.longitude, 1)
-                    if (locationlist.size > 0) {
-                        println(locationlist.get(0).toString())
-
-                    }
-                } catch (e: Exception) {
-                    e.printStackTrace()
-
-                }
-            }
+//            locationListener = LocationListener { p0 ->
+//                val currentLocation = LatLng(p0.latitude, p0.longitude)
+//                mMap.clear()
+//                mMap.addMarker(MarkerOptions().position(currentLocation).title("Konumunuz"))
+//                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(currentLocation, 16f))
+//                //lokasyon veya konum değişince nele ryapılacak
+//                val geocoder = Geocoder(this@MapsActivity, Locale.getDefault())
+//
+//                try {
+//                    val locationlist = geocoder.getFromLocation(p0.latitude, p0.longitude, 1)
+//                    if (locationlist.size > 0) {
+//                        println(locationlist.get(0).toString())
+//
+//                    }
+//                } catch (e: Exception) {
+//                    e.printStackTrace()
+//
+//                }
+//            }
             if (ContextCompat.checkSelfPermission(
                     this,
                     Manifest.permission.ACCESS_FINE_LOCATION
@@ -101,10 +106,12 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                     1
                 )
             } else {
-                locationManager!!.requestLocationUpdates(
-                    LocationManager.GPS_PROVIDER, 100, 10f,
-                    locationListener!!
-                )
+//                locationManager!!.requestLocationUpdates(
+//                    LocationManager.GPS_PROVIDER, 100, 10f,
+//                    locationListener!!
+//
+//                )
+
                 val lastlocation =
                     locationManager!!.getLastKnownLocation(LocationManager.GPS_PROVIDER)
                 if (lastlocation != null) {
@@ -114,9 +121,9 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                 }
             }
 
-            mMap.setOnMapLongClickListener(longClickListener)
-        }
 
+        }
+        mMap.setOnMapLongClickListener(longClickListener)
     }
 
     private val btnClickForNavigation = View.OnClickListener {

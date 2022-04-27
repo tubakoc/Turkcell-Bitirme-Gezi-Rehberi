@@ -32,11 +32,11 @@ class PlaceLogic {
             }
             return list
         }
-        fun setVisit(place: Place){
-            if(place.isVisited==0){
+        fun setVisit(placeId:Int){
+
                 val placeOperation=PlaceOperation(_context!!)
-                placeOperation.setVisit(place.id,1)
-            }
+                placeOperation.setVisit(placeId,1)
+
 
         }
         fun getPlaceDetail( id: Int): Place {
