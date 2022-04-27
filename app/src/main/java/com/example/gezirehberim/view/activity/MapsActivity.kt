@@ -15,13 +15,13 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.example.gezirehberim.R
 import com.example.gezirehberim.databinding.ActivityMapsBinding
-
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
+
 import java.util.*
 
 
@@ -34,7 +34,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
     private var locationName: String? = null
     private var locationManager: LocationManager? = null
     private var locationListener: LocationListener? = null
-    private var lastLatLang:LatLng?=null
+    private var lastLatLang: LatLng?=null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 

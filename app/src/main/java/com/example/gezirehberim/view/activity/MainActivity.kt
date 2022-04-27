@@ -40,10 +40,15 @@ class MainActivity : AppCompatActivity() {
         createTab()
         //tıklama olayları
         setOnClickListeners()
+        splashGoster()
 
 
     }
 
+    private fun splashGoster()
+    {
+
+    }
 
     private fun changeViewPagerOrTabLayout() {
         TabLayoutMediator(binding.tabLayout, binding.viewpager) { _, _ -> }.attach()

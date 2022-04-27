@@ -8,7 +8,9 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
 import android.provider.MediaStore
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import androidx.core.app.ActivityCompat.requestPermissions
 import java.io.IOException
 
 object CameraGallery{
@@ -50,9 +52,10 @@ object CameraGallery{
         }
         else
         {
-          //  requestPermissions(requestList.toTypedArray(),0)
+         //  requestPermissions(requestList.toTypedArray(),0)
         }
     }
+
 
     @Throws(IOException::class)
     fun createImageFile()
