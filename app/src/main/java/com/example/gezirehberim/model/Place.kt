@@ -4,9 +4,9 @@ import kotlin.properties.Delegates
 
 class Place {
     var id by Delegates.notNull<Int>()
-    lateinit var name: String
-    lateinit var locationDefinition: String
-    lateinit var description: String
+     var name: String?=null
+     var locationDefinition: String?=null
+     var description: String?=null
     lateinit var priority: Priority
     var pictureList = ArrayList<Picture>()
     var latitude by Delegates.notNull<Double>()

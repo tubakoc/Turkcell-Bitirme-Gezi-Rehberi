@@ -51,7 +51,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         lat = intent.getDoubleExtra("lat", 361.0)
         long = intent.getDoubleExtra("long", 361.0)
 
-
+        ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.ACCESS_FINE_LOCATION), 1)
     }
 
 
@@ -59,15 +59,27 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         mMap = googleMap
         mMap.uiSettings.isZoomControlsEnabled = true
 
-        //location name detay ekranından geldiği için sadece onu kontrol etsek yeterli
         if (lat==361.0||long==361.0) {
-            val location = LatLng(lat!!, long!!)
-          //  mMap.isMyLocationEnabled = true
+            var location = LatLng(lat!!, long!!)
+            if (ContextCompat.checkSelfPermission(
+                    this,
+                    Manifest.permission.ACCESS_FINE_LOCATION
+                ) == PackageManager.PERMISSION_GRANTED
+            ){locationManager = getSystemService(Context.LOCATION_SERVICE) as LocationManager
+                mMap.isMyLocationEnabled=true
+                val lastlocation =
+                    locationManager!!.getLastKnownLocation(LocationManager.GPS_PROVIDER)
+                if (lastlocation != null) {
+                   location = LatLng(lastlocation.latitude, lastlocation.longitude)
+                }
+
+
+            }
             mMap.addMarker(
-                MarkerOptions().position(location).title(intent.getStringExtra("locationName"))
+                MarkerOptions().position(LatLng(41.034466,28.9506012)).title(intent.getStringExtra("locationName"))
             )
 
-            mMap.moveCamera(CameraUpdateFactory.newLatLng(location))
+            mMap.moveCamera(CameraUpdateFactory.newLatLng(LatLng(41.034466,28.9506012)))
             binding.saveButtonLayout.btnMapApply.text="Kaydet"
             binding.saveButtonLayout.btnMapApply.setOnClickListener(btnClickForAddPlace)
 
@@ -75,7 +87,15 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
             binding.saveButtonLayout.btnMapApply.setOnClickListener(btnClickForNavigation)
             binding.saveButtonLayout.btnMapApply.text="Git"
+            val locationName=intent.getStringExtra("locationName")
             locationManager = getSystemService(Context.LOCATION_SERVICE) as LocationManager
+            mMap.addMarker(
+                MarkerOptions().position(LatLng(lat!!,long!!)).title(locationName)
+            )
+            binding.topBar.title.text=locationName
+
+
+            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(LatLng(lat!!,long!!),16f))
 //            locationListener = LocationListener { p0 ->
 //                val currentLocation = LatLng(p0.latitude, p0.longitude)
 //                mMap.clear()
@@ -112,13 +132,13 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 //
 //                )
 
-                val lastlocation =
-                    locationManager!!.getLastKnownLocation(LocationManager.GPS_PROVIDER)
-                if (lastlocation != null) {
-                    lastLatLang = LatLng(lastlocation.latitude, lastlocation.longitude)
-                    mMap.addMarker(MarkerOptions().position(lastLatLang).title("Konumunuz"))
-                    mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(lastLatLang, 16f))
-                }
+//                val lastlocation =
+//                    locationManager!!.getLastKnownLocation(LocationManager.GPS_PROVIDER)
+//                if (lastlocation != null) {
+//                    lastLatLang = LatLng(lastlocation.latitude, lastlocation.longitude)
+//                    mMap.addMarker(MarkerOptions().position(lastLatLang).title("Konumunuz"))
+//                    mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(lastLatLang, 16f))
+//                }
             }
 
 
