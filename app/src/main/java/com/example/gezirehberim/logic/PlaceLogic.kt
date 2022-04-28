@@ -17,10 +17,7 @@ class PlaceLogic {
             for (picture in place.pictureList) {
                 picture.placeId = id.toInt()
                 pictureOperation.addPicture(picture)
-
             }
-
-
             return id
         }
 

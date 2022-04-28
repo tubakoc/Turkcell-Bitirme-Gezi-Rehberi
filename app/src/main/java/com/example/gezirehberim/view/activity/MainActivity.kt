@@ -6,10 +6,12 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.gezirehberim.R
+import com.example.gezirehberim.constant.Constant
 import com.example.gezirehberim.databinding.ActivityMainBinding
 import com.example.gezirehberim.databinding.TabLayoutBinding
 import com.example.gezirehberim.databinding.TopBarBinding
 import com.example.gezirehberim.view.adapter.ViewPagerAdapter
+import com.example.gezirehberim.view.fragment.PlaceDetailFragment
 import com.example.gezirehberim.view.fragment.PlaceVisitFragment
 import com.example.gezirehberim.view.fragment.PlaceVisitedFragment
 import com.google.android.material.tabs.TabLayoutMediator
@@ -47,8 +49,7 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    private fun splashGoster()
-    {
+    private fun splashGoster() {
 
     }
 
@@ -56,17 +57,20 @@ class MainActivity : AppCompatActivity() {
         TabLayoutMediator(binding.tabLayout, binding.viewpager) { _, _ -> }.attach()
     }
 
-    private fun createViewPager(){
-        val adapter = ViewPagerAdapter(this)
+    private lateinit var viewPagerAdapter: ViewPagerAdapter
+    private fun createViewPager() {
+        viewPagerAdapter = ViewPagerAdapter(this)
 
-        adapter.fragmentAdd(PlaceVisitFragment())
-        adapter.fragmentAdd(PlaceVisitedFragment())
+        viewPagerAdapter.fragmentAdd(PlaceVisitFragment())
+        viewPagerAdapter.fragmentAdd(PlaceVisitedFragment())
 
-        binding.viewpager.adapter = adapter
+        binding.viewpager.adapter = viewPagerAdapter
 
     }
 
-    private fun createTab(){
+
+
+    private fun createTab() {
         var tab = TabLayoutBinding.inflate(layoutInflater)
         tab.tvImage.setImageResource(R.drawable.ic_to_visit)
         tab.tvName.text = resources.getString(R.string.toVisitText)
@@ -80,11 +84,16 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    private fun setOnClickListeners()=binding.apply{
+    private fun setOnClickListeners() = binding.apply {
 
         //yer ekleme ekranına gidilecek (activity)
-        addPlaceButton.setOnClickListener{}
+        addPlaceButton.setOnClickListener {
 
+            val intent = Intent(this@MainActivity, PlaceAdd::class.java)
+            intent.putExtra("placeOrVisit", Constant.ADD_PLACE)
+            startActivity(intent)
+
+        }
 
 
     }

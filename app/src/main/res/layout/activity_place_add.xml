@@ -11,13 +11,16 @@
         android:id="@+id/topBar"
         layout="@layout/top_bar" />
 
+
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layout_constraintBottom_toTopOf="@+id/saveButtonLayout"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/topBar">
+        app:layout_constraintTop_toBottomOf="@+id/topBar"
+        app:layout_constraintVertical_bias="1.0">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -26,76 +29,68 @@
 
 
             <androidx.recyclerview.widget.RecyclerView
-                tools:listitem="@layout/photo_add_design"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
                 android:id="@+id/photoAddRecycler"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:listitem="@layout/photo_add_design" />
 
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/addLocationButton"
                 android:layout_width="wrap_content"
-                android:layout_height="48dp"
+                android:layout_height="@dimen/margin_25"
                 android:layout_marginTop="@dimen/margin_15"
                 android:background="@drawable/bg_add_visit"
                 android:text="@string/buttonLocationAddText"
                 android:textAllCaps="false"
                 android:textColor="@color/white"
                 android:textSize="10sp"
-                android:visibility="visible"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/photoAddRecycler" />
 
-
-            <Spinner
-                android:visibility="visible"
-                android:layout_marginTop="@dimen/margin_13"
-                android:id="@+id/prioritySpinner"
+            <include
+                android:id="@+id/spinnerLayout"
+                layout="@layout/priority_spinner"
                 android:layout_width="match_parent"
-                android:layout_height="24dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/addLocationButton" />
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_13"
+                android:background="@drawable/bg_spinner"
+                app:layout_constraintTop_toBottomOf="@+id/addLocationButton"/>
+
 
             <include
-                android:layout_marginTop="@dimen/margin_13"
                 android:id="@+id/visitDate"
                 layout="@layout/short_description_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@+id/prioritySpinner"
-                 />
+                android:layout_marginTop="@dimen/margin_13"
+                app:layout_constraintTop_toBottomOf="@+id/spinnerLayout" />
 
             <include
-                android:visibility="gone"
-                android:layout_marginTop="@dimen/margin_13"
                 android:id="@+id/placeShortDescription"
                 layout="@layout/short_description_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@+id/visitDate"
-                 />
+                android:layout_marginTop="@dimen/margin_13"
+                app:layout_constraintTop_toBottomOf="@+id/visitDate" />
 
             <include
                 android:id="@+id/visitDescription"
                 layout="@layout/description_layout"
                 android:layout_width="match_parent"
-                android:layout_height="150dp"
+                android:layout_height="100dp"
                 android:layout_marginTop="@dimen/margin_13"
                 app:layout_constraintTop_toBottomOf="@+id/placeShortDescription" />
-
-
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.core.widget.NestedScrollView>
-
 
     <include
         android:id="@+id/saveButtonLayout"

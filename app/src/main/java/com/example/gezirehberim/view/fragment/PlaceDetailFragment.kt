@@ -63,12 +63,13 @@ class PlaceDetailFragment : Fragment() {
         binding.topBar.title.text = place
             .name
         binding.shortDescriptionLayout.header.text = "Yer Kısa Tanım"
-        binding.shortDescriptionLayout.placeShortDescriptionTextview.text = place.locationDefinition
+        binding.shortDescriptionLayout.placeShortDescriptionTextview.hint = place.locationDefinition
+        binding.shortDescriptionLayout.placeShortDescriptionTextview.isEnabled=false
         binding.descriptionLayout.header.text = "Kısa Açıklama"
-        binding.descriptionLayout.descriptionTextview.text = place
+        binding.descriptionLayout.descriptionTextview.hint = place
             .description
         //ekranda deneme amaçlı öncelik değeri gösterir
-        binding.priorityDrawable.background = priorities[place.priority.ordinal]
+        binding.priorityDrawable.background = priorities[place.priority]
 
         initializeSlider(PictureLogic.returnPicturesForSlider(place))
     }
@@ -84,7 +85,7 @@ class PlaceDetailFragment : Fragment() {
 
             Toast.makeText(
                 context,
-                "Lütfen Internet bağlantınızı kontrol ediniz",
+                "Lütfen internet bağlantınızı kontrol ediniz",
                 Toast.LENGTH_LONG
             ).show()
 

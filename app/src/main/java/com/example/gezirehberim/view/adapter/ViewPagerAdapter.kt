@@ -15,6 +15,10 @@ class ViewPagerAdapter(fragmentActivity: FragmentActivity) :
         fragmentList.add(fragment)
     }
 
+    fun fragmentDelete() {
+        fragmentList.removeAt(fragmentList.size-1)
+    }
+
     override fun getItemCount() = fragmentList.size
 
     override fun createFragment(position: Int): Fragment {

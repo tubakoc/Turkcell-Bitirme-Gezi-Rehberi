@@ -12,6 +12,7 @@ import com.example.gezirehberim.databinding.FragmentTravelBinding
 import com.example.gezirehberim.logic.PlaceLogic
 import com.example.gezirehberim.model.Place
 import com.example.gezirehberim.view.activity.MainActivity
+import com.example.gezirehberim.view.adapter.TravelAdapter
 
 class PlaceVisitFragment : Fragment() {
 
@@ -47,10 +48,15 @@ class PlaceVisitFragment : Fragment() {
     private fun getToBeVisited() {
 
         val toBeVisitedList = PlaceLogic.getPlaceList(Constant.TO_BE_VISITED_LIST_ID)
+        val adapter = TravelAdapter(toBeVisitedList, ::itemClick)
+        binding.rvTravel.adapter = adapter
 
-        // adapter sınıfı yazılacak olup burdaki recycler view'a gelen veri yollanacak
-        //binding.rvTravel.adapter=adapter
 
+    }
+
+    private fun itemClick(index: Int) {
+
+        //tıklanınca detay sayfasına gidecek
 
     }
 

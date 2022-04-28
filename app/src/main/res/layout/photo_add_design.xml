@@ -17,8 +17,9 @@
 
         <ImageView
             android:id="@+id/photo"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="0dp"
+            android:scaleType="centerCrop"
             app:layout_constraintBottom_toTopOf="@+id/removeButton"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -41,7 +42,7 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-
+        android:id="@+id/photoAddLayout"
         android:foreground="?attr/selectableItemBackground"
         android:clickable="true"
         android:background="@drawable/gray_circle"

@@ -22,7 +22,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
 
-    <TextView
+    <androidx.appcompat.widget.AppCompatEditText
         android:maxLines="3"
         android:id="@+id/descriptionTextview"
         android:layout_width="0dp"

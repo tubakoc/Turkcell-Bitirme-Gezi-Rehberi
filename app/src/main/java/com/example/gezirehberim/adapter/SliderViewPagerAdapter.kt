@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.TextView
 import androidx.viewpager.widget.PagerAdapter
 import com.example.gezirehberim.view.activity.MainActivity.Companion._context
 import com.example.gezirehberim.constant.convertImagetoBitmap
@@ -28,7 +29,9 @@ class SliderViewPagerAdapter(private val sliderList: List<Picture>) : PagerAdapt
             inflater.inflate(com.example.gezirehberim.R.layout.item_viewpager_layout, null)
         val image =
             view.findViewById<ImageView>(com.example.gezirehberim.R.id.imageViewPager)
-
+        val date =
+            view.findViewById<TextView>(com.example.gezirehberim.R.id.date)
+        date.text = sliderList[position].date
         image.setImageBitmap(convertImagetoBitmap(sliderList[position].data))
         container.addView(view)
         return view

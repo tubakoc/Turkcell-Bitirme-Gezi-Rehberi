@@ -7,7 +7,7 @@ class Place {
      var name: String?=null
      var locationDefinition: String?=null
      var description: String?=null
-    lateinit var priority: Priority
+    var priority by Delegates.notNull<Int>()
     var pictureList = ArrayList<Picture>()
     var latitude by Delegates.notNull<Double>()
     var longitude by Delegates.notNull<Double>()

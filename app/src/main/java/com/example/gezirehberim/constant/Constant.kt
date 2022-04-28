@@ -16,8 +16,9 @@ class Constant {
         const val TO_BE_VISITED_LIST_ID=0
         const val VISITED_LIST_ID=1
         val priorities = Priority.getPriorities()
-
-
+        const val ADD_PLACE = true
+        const val ADD_VISIT = false
+        const val REQUEST_CODE_CAMERA_AND_GALLERY = 1923
     }
 
 }
