@@ -63,7 +63,6 @@ class PlaceAdd : AppCompatActivity() {
 
 
         binding.topBar.backButton.visibility = View.VISIBLE
-        binding.topBar.title.text = "Yer Ekle"
 
         setOnClicks()
 
@@ -84,9 +83,10 @@ class PlaceAdd : AppCompatActivity() {
     }
 
     private fun setVisitInitialize()= binding.apply {
-        topBar.title.text="Yer Adı"
-        addLocationButton.visibility=View.INVISIBLE
+        topBar.title.text = intent.getStringExtra("placeName")
+        addLocationButton.visibility=View.GONE
         visitDate.header.text="Ziyaret Tarihi"
+        visitDate.placeShortDescriptionTextview.isEnabled = false
 
         placeShortDescription.root.visibility=View.GONE
         visitDate.root.setOnClickListener {   val c = Calendar.getInstance()

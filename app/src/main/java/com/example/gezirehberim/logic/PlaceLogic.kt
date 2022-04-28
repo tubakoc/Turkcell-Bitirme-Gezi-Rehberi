@@ -30,7 +30,7 @@ class PlaceLogic {
         fun setVisit(placeId: Int, date: String){
 
                 val placeOperation=PlaceOperation(_context!!)
-                placeOperation.setVisit(placeId,1,date)
+                placeOperation.setVisit(placeId,1)
 
 
         }

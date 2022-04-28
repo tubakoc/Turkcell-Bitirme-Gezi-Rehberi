@@ -121,21 +121,17 @@
                 android:layout_height="200dp"
                 android:layout_marginTop="@dimen/margin_13"
                 android:layout_marginBottom="@dimen/margin_7"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@+id/descriptionLayout"
                 app:layout_constraintStart_toStartOf="@+id/descriptionLayout"
                 app:layout_constraintTop_toBottomOf="@+id/visitHistoryHeader" />
 
 
-
-
         </androidx.constraintlayout.widget.ConstraintLayout>
 
 
     </androidx.core.widget.NestedScrollView>
-
-
-
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

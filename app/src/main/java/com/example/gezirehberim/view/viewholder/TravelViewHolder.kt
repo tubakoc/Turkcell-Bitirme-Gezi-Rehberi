@@ -11,7 +11,9 @@ import com.example.gezirehberim.constant.Constant
 import com.example.gezirehberim.constant.convertImagetoBitmap
 import com.example.gezirehberim.model.Place
 
-class TravelViewHolder(itemView: View, itemClick: ((position: Int) -> Unit)) :
+class TravelViewHolder(
+    itemView: View, itemClick: ((position: Int) -> Unit), val isVisitedOrVisit: Int
+) :
     RecyclerView.ViewHolder(itemView) {
     var travelImage: ImageView
     var locationName: TextView
@@ -37,17 +39,20 @@ class TravelViewHolder(itemView: View, itemClick: ((position: Int) -> Unit)) :
 
     fun bindData(place: Place) {
         //  Model oluşturulduktan sonra atama işlemleri yapılacak priority traveldate image eklenecek
-        if (place.isVisited == 1 && place.lasVisitDate != null) {
-            travelDate.visibility=View.VISIBLE
-            travelDate.text=place.lasVisitDate
-            priorityCircle.visibility = View.GONE
-        } else {
-            travelDate.visibility = View.GONE
-        }
         locationName.text = place.name
         locationDef.text = place.locationDefinition
         locationState.text = place.description
-        priorityCircle.background = Constant.priorities[place.priority]
+        if (isVisitedOrVisit == Constant.TO_BE_VISITED_LIST_ID)
+            priorityCircle.background = Constant.priorities[place.priority]
+        else {
+
+            if (place.visitationList.size > 0) {
+                travelDate.text = place.visitationList[0].date
+            } else {
+                travelDate.text = place.pictureList[0].date
+            }
+        }
+
         if (place.pictureList.size > 0)
             travelImage.setImageBitmap(convertImagetoBitmap(place.pictureList[0].data))
         else

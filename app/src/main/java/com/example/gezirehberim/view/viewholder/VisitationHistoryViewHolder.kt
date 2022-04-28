@@ -16,13 +16,11 @@ class VisitationHistoryViewHolder(itemView : View) : RecyclerView.ViewHolder(ite
     init {
         visitationDescription = itemView.findViewById(R.id.descriptionTextview)
         visitationDate = itemView.findViewById(R.id.header)
-
-
-
+        visitationDate.isEnabled = false
+        visitationDescription.isEnabled = false
     }
-    fun bindData(context : Context, visitation: Visitation) {
+    fun bindData(visitation: Visitation) {
         visitationDescription.text = visitation.description
-
         visitationDate.text = visitation.date
 
     }

@@ -9,10 +9,14 @@ import com.example.gezirehberim.model.Place
 import com.example.gezirehberim.view.viewholder.TravelViewHolder
 
 //data model olusturulduktan sonra düzenlenecek Array list tip düzeltilecek
-class TravelAdapter (var liste:ArrayList<Place>, val itemClick : (position : Int)->Unit) : RecyclerView.Adapter<TravelViewHolder>() {
+class TravelAdapter(
+    var liste: ArrayList<Place>,
+    val itemClick: (position: Int) -> Unit,
+    val isVisitedOrVisit: Int
+) : RecyclerView.Adapter<TravelViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TravelViewHolder {
-        val v = LayoutInflater.from(parent.context).inflate(R.layout.rvc_travel,parent,false)
-        return TravelViewHolder(v,itemClick)
+        val v = LayoutInflater.from(parent.context).inflate(R.layout.rvc_travel, parent, false)
+        return TravelViewHolder(v, itemClick, isVisitedOrVisit)
     }
 
     override fun onBindViewHolder(holder: TravelViewHolder, position: Int) {
@@ -24,3 +28,4 @@ class TravelAdapter (var liste:ArrayList<Place>, val itemClick : (position : Int
 
     }
 }
+

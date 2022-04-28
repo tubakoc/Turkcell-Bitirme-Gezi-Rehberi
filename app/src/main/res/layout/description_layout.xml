@@ -6,6 +6,7 @@
     android:paddingStart="@dimen/margin_14"
     android:paddingEnd="@dimen/margin_4"
     android:paddingBottom="@dimen/margin_9"
+    android:layout_margin="@dimen/margin_5"
     android:background="@drawable/bg_edittext_card">
 
 

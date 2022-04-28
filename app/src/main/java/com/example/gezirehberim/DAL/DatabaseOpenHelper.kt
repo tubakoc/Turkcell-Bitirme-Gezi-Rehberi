@@ -13,7 +13,7 @@ class DatabaseOpenHelper(
     SQLiteOpenHelper(context, dbName, factory, version) {
     override fun onCreate(p0: SQLiteDatabase) {
         var query =
-            "CREATE TABLE Place(Id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, Name TEXT,LocationDefinition TEXT,Description TEXT,Priority INTEGER,Latitude REAL NOT NULL,Longitude REAL NOT NULL,IsVisited INTEGER NOT NULL,LastVisit TEXT) "
+            "CREATE TABLE Place(Id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, Name TEXT,LocationDefinition TEXT,Description TEXT,Priority INTEGER,Latitude REAL NOT NULL,Longitude REAL NOT NULL,IsVisited INTEGER NOT NULL) "
         p0.execSQL(query)
         query =
             "CREATE TABLE Visitation(Id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,PlaceId INTEGER NOT NULL,Date TEXT,Description TEXT, FOREIGN KEY(PlaceId) REFERENCES Place(Id)) "

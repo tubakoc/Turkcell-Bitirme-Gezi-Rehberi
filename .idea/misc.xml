@@ -28,6 +28,15 @@
         <entry key="..\:/Users/Tuba/Desktop/KotlinProject/GeziRehberim/app/src/main/res/layout/slider_viewpager.xml" value="0.15443840579710144" />
         <entry key="..\:/Users/Tuba/Desktop/KotlinProject/GeziRehberim/app/src/main/res/layout/tab_layout.xml" value="0.25" />
         <entry key="..\:/Users/Tuba/Desktop/KotlinProject/GeziRehberim/app/src/main/res/layout/top_bar.xml" value="0.15443840579710144" />
+        <entry key="..\:/Users/emre.kucuk/Desktop/daha daha yeni/Turkcell-Bitirme-Gezi-Rehberi/app/src/main/res/layout/activity_splash_screen.xml" value="0.20729166666666668" />
+        <entry key="..\:/Users/emre.kucuk/Desktop/daha daha yeni/Turkcell-Bitirme-Gezi-Rehberi/app/src/main/res/layout/description_layout.xml" value="0.18177083333333333" />
+        <entry key="..\:/Users/emre.kucuk/Desktop/daha daha yeni/Turkcell-Bitirme-Gezi-Rehberi/app/src/main/res/layout/fragment_detail_place.xml" value="0.20729166666666668" />
+        <entry key="..\:/Users/emre.kucuk/Desktop/daha daha yeni/Turkcell-Bitirme-Gezi-Rehberi/app/src/main/res/layout/fragment_travel.xml" value="0.18177083333333333" />
+        <entry key="..\:/Users/emre.kucuk/Desktop/daha daha yeni/Turkcell-Bitirme-Gezi-Rehberi/app/src/main/res/layout/full_screen_image.xml" value="0.20729166666666668" />
+        <entry key="..\:/Users/emre.kucuk/Desktop/daha daha yeni/Turkcell-Bitirme-Gezi-Rehberi/app/src/main/res/layout/item_viewpager_layout.xml" value="0.20729166666666668" />
+        <entry key="..\:/Users/emre.kucuk/Desktop/daha daha yeni/Turkcell-Bitirme-Gezi-Rehberi/app/src/main/res/layout/rvc_travel.xml" value="0.20729166666666668" />
+        <entry key="..\:/Users/emre.kucuk/Desktop/daha daha yeni/Turkcell-Bitirme-Gezi-Rehberi/app/src/main/res/layout/short_description_layout.xml" value="0.18177083333333333" />
+        <entry key="..\:/Users/emre.kucuk/Desktop/daha daha yeni/Turkcell-Bitirme-Gezi-Rehberi/app/src/main/res/layout/slider_viewpager.xml" value="0.20729166666666668" />
         <entry key="..\:/Users/utku/AndroidStudioProjects/Turkcell-Bitirme-Gezi-Rehberi/app/src/main/res/drawable/bg_add_visit.xml" value="0.241" />
         <entry key="..\:/Users/utku/AndroidStudioProjects/Turkcell-Bitirme-Gezi-Rehberi/app/src/main/res/layout/activity_main.xml" value="0.136" />
         <entry key="..\:/Users/utku/AndroidStudioProjects/Turkcell-Bitirme-Gezi-Rehberi/app/src/main/res/layout/activity_maps.xml" value="0.11614583333333334" />
@@ -45,7 +54,7 @@
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="11" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">

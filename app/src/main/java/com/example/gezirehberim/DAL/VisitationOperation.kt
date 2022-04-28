@@ -90,7 +90,7 @@ class VisitationOperation(context: Context) {
     }
 
     private fun getVisitationByPlaceId(placeId: Int): Cursor {
-        val query = "Select * from $TABLENAME where PlaceId=?"
+        val query = "Select * from $TABLENAME where PlaceId=? order by date desc"
         return visitationDatabase!!.rawQuery(query, arrayOf(placeId.toString()))
     }
 

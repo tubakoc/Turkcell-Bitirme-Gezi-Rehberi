@@ -1,5 +1,7 @@
 package com.example.gezirehberim.view.fragment
 
+import android.R
+import android.app.Dialog
 import android.content.Context
 import android.content.Intent
 import android.net.ConnectivityManager
@@ -8,6 +10,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
@@ -17,6 +20,7 @@ import com.example.gezirehberim.adapter.SliderViewPagerAdapter
 
 import com.example.gezirehberim.constant.Constant.Companion.priorities
 import com.example.gezirehberim.constant.checkInternetConnection
+import com.example.gezirehberim.constant.convertImagetoBitmap
 import com.example.gezirehberim.databinding.FragmentDetailPlaceBinding
 import com.example.gezirehberim.logic.PictureLogic
 import com.example.gezirehberim.logic.PlaceLogic
@@ -26,6 +30,7 @@ import com.example.gezirehberim.view.activity.MainActivity
 import com.example.gezirehberim.view.activity.MainActivity.Companion.topBar
 import com.example.gezirehberim.view.activity.MapsActivity
 import com.example.gezirehberim.view.activity.PlaceAdd
+import com.example.gezirehberim.view.adapter.VisitationHistoryAdapter
 import com.google.android.material.tabs.TabLayout
 
 class PlaceDetailFragment : Fragment() {
@@ -35,6 +40,7 @@ class PlaceDetailFragment : Fragment() {
     lateinit var place: Place
 
     private val args: PlaceDetailFragmentArgs by navArgs()
+    private lateinit var pictureList: ArrayList<Picture>
 
 
     private var selectedPhoto = 0
@@ -51,20 +57,14 @@ class PlaceDetailFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        //ilk sayfada tıklanınca id yi argument ile buraya paslarız
-        val id = args.id
-        if (id != null) {
-            //id yolladığımız için tek değer dönecek bu yüzden sıfırıncı indexi aldık direkt
-            place = PlaceLogic.getPlaceDetail(id)
-        }
-
-        setView()
-
 
         topBarInitialize()
 
-        //initializeSlider(place.pictureList)
+    }
 
+    override fun onResume() {
+        super.onResume()
+        setView()
     }
 
     private fun topBarInitialize() {
@@ -73,6 +73,12 @@ class PlaceDetailFragment : Fragment() {
     }
 
     private fun setView() {
+        //ilk sayfada tıklanınca id yi argument ile buraya paslarız
+        if (args.id != null) {
+            //id yolladığımız için tek değer dönecek bu yüzden sıfırıncı indexi aldık direkt
+            place = PlaceLogic.getPlaceDetail(args.id)
+        }
+        initializeVisitation()
         binding.shortDescriptionLayout.showLocationButton.visibility = View.VISIBLE
         binding.shortDescriptionLayout.showLocationButton.setOnClickListener(btnClickForLocation)
         topBar!!.title.text = place
@@ -86,8 +92,9 @@ class PlaceDetailFragment : Fragment() {
         binding.addVisitButton.setOnClickListener(btnClickAddVisit)
         //ekranda deneme amaçlı öncelik değeri gösterir
         binding.priorityDrawable.background = priorities[place.priority]
+        pictureList = PictureLogic.returnPicturesForSlider(place)
 
-        initializeSlider(PictureLogic.returnPicturesForSlider(place))
+        initializeSlider()
     }
 
     private val btnClickForLocation = View.OnClickListener {
@@ -96,6 +103,7 @@ class PlaceDetailFragment : Fragment() {
     private val btnClickAddVisit=View.OnClickListener {
         val intent=Intent(requireContext(),PlaceAdd::class.java)
         intent.putExtra("placeId",place.id)
+        intent.putExtra("placeName", place.name)
         startActivity(intent)
     }
 
@@ -125,27 +133,10 @@ class PlaceDetailFragment : Fragment() {
     }
 
 
-    private fun initializeSlider(picturelist: ArrayList<Picture>) {
+    private fun initializeSlider() {
 
 
-        // veritabanından gelen resimler bitmap ya da drawable olarak çevrildikten sonra liste ile slidera gelecek(test görselleri)
-//        val list = listOf<Int>(
-//            R.drawable.resim,
-//            R.drawable.resim,
-//            R.drawable.resim,
-//            R.drawable.resim,
-//            R.drawable.resim,
-//            R.drawable.resim,
-//            R.drawable.resim,
-//            R.drawable.resim,
-//            R.drawable.resim
-//        )
-//        val newPictureList=ArrayList<Bitmap>()
-//        for (picture in picturelist){
-//            newPictureList.add(picture.convertImagetoBitmap())
-//        }
-
-        val adapter = SliderViewPagerAdapter(picturelist)
+        val adapter = SliderViewPagerAdapter(pictureList,::showFullScreenImage)
         binding.slider.viewPager.adapter = adapter
         binding.slider.dots.setupWithViewPager(binding.slider.viewPager)
 
@@ -173,5 +164,33 @@ class PlaceDetailFragment : Fragment() {
         MainActivity.topBar!!.backButton.visibility=View.GONE
     }
 
+    private fun initializeVisitation() {
+        if (place.visitationList.size > 0) {
+            val adapter = VisitationHistoryAdapter(place.visitationList)
+            binding.recylerVisitHistory.adapter = adapter
+
+
+        } else {
+            binding.visitHistoryHeader.visibility = View.GONE
+            binding.recylerVisitHistory.visibility = View.GONE
+        }
+    }
+
+    private fun showFullScreenImage(position: Int) {
+        val view = LayoutInflater.from(requireContext())
+            .inflate(com.example.gezirehberim.R.layout.full_screen_image, null, false)
+
+        view.findViewById<ImageView>(com.example.gezirehberim.R.id.image).setImageBitmap(
+            convertImagetoBitmap(pictureList[position].data)
+        )
+
+        val dg= Dialog(requireContext(), R.style.Theme_Material_Light_NoActionBar_Fullscreen)
+        dg.setContentView(view)
+        dg.show()
+
+
+
+
+    }
 
 }

@@ -48,7 +48,7 @@ class PlaceVisitedFragment : Fragment() {
 
         visitedList = PlaceLogic.getPlaceList(Constant.VISITED_LIST_ID)
 
-        val adapter = TravelAdapter(visitedList, ::itemClick)
+        val adapter = TravelAdapter(visitedList, ::itemClick, Constant.VISITED_LIST_ID)
 
         binding.rvTravel.adapter = adapter
 

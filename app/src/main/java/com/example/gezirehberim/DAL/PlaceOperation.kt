@@ -5,6 +5,7 @@ import android.content.ContentValues
 import android.content.Context
 import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
+import com.example.gezirehberim.logic.VisitationLogic
 import com.example.gezirehberim.model.Place
 import com.example.gezirehberim.model.Priority
 
@@ -37,11 +38,10 @@ class PlaceOperation(context: Context) {
         }
     }
 
-    fun setVisit(id: Int, visited: Int, date: String) {
+    fun setVisit(id: Int, visited: Int) {
         val contentValues = ContentValues()
 
         contentValues.put(ISVISITED, visited)
-        contentValues.put(LASTVISIT,date)
         open()
       //placeDatabase!!.execSQL("Update $TABLENAME SET $ISVISITED =CASE WHEN $ISVISITED=0 THEN $ISVISITED=1 END WHERE Id=$id  ")
         placeDatabase!!.update(
@@ -129,6 +129,7 @@ class PlaceOperation(context: Context) {
             do {
                 place = Place()
                 place.id = cursor.getInt(0)
+                place.name = cursor.getString(cursor.getColumnIndex(NAME))
                 place.description = cursor.getString(cursor.getColumnIndex(DESCRIPTION))
                 place.locationDefinition =
                     cursor.getString(cursor.getColumnIndex(LOCATIONDEFINITION))
@@ -136,7 +137,7 @@ class PlaceOperation(context: Context) {
                 place.isVisited = cursor.getInt(cursor.getColumnIndex(ISVISITED))
                 place.latitude = cursor.getDouble(cursor.getColumnIndex(LATITUDE))
                 place.longitude = cursor.getDouble(cursor.getColumnIndex(LONGITUDE))
-                place.lasVisitDate=cursor.getString(cursor.getColumnIndex(LASTVISIT))
+                place.visitationList = VisitationLogic.getVisitationList(place.id)
 
                 placeList.add(place)
             } while (cursor.moveToNext())

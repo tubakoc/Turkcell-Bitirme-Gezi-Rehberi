@@ -13,7 +13,7 @@ import com.example.gezirehberim.constant.convertImagetoBitmap
 import com.example.gezirehberim.model.Picture
 
 
-class SliderViewPagerAdapter(private val sliderList: List<Picture>) : PagerAdapter() {
+class SliderViewPagerAdapter(private val sliderList: List<Picture>,val itemClick:(position:Int)->Unit) : PagerAdapter() {
 
     override fun getCount() = sliderList.size
 
@@ -31,8 +31,10 @@ class SliderViewPagerAdapter(private val sliderList: List<Picture>) : PagerAdapt
             view.findViewById<ImageView>(com.example.gezirehberim.R.id.imageViewPager)
         val date =
             view.findViewById<TextView>(com.example.gezirehberim.R.id.date)
-         date.text = sliderList[position].date
+        date.text = sliderList[position].date
         image.setImageBitmap(convertImagetoBitmap(sliderList[position].data))
+
+        view.setOnClickListener { itemClick(position) }
         container.addView(view)
         return view
     }
