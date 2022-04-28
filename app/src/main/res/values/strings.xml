@@ -19,4 +19,5 @@
     <string name="saveText">Kaydet</string>
     <string name="info_empty">Tüm alanların eksiksiz doldurulması gerekir</string>
     <string name="MAPS_API_KEY">AIzaSyB1I9ufV60yaUFcCHLsOYbtwWGT95VoEnE</string>
+    <string name="splashtext">Gezi \nRehberim</string>
 </resources>
