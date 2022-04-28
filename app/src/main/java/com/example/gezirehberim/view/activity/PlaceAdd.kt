@@ -241,9 +241,10 @@ class PlaceAdd : AppCompatActivity() {
     private fun setPictureList(): ArrayList<Picture> {
 
         val list = ArrayList<Picture>()
-        val pc = Picture()
+
 
         choosePhotoListBitmap.forEach {
+            val pc = Picture()
 //boyutu düşürmek için yapıldı boyut çok yüksek olunca dbye kaydedilmiyor
             pc.data = convertBitmaptoBase64(Bitmap.createScaledBitmap(it, 300, 300, false))
             pc.date = getCurrentDate()

@@ -5,16 +5,21 @@ import com.example.gezirehberim.DAL.PlaceOperation
 import com.example.gezirehberim.DAL.VisitationOperation
 import com.example.gezirehberim.model.Place
 import com.example.gezirehberim.view.activity.MainActivity.Companion._context
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
 class PlaceLogic {
     companion object {
-        fun addPlace( place: Place): Long {
+        fun addPlace(place: Place): Long {
             val placeOperation = PlaceOperation(_context!!)
             val pictureOperation = PictureOperation(_context!!)
             val id = placeOperation.addPlace(place)
             for (picture in place.pictureList) {
-                picture.placeId = id.toInt()
-                pictureOperation.addPicture(picture)
+                GlobalScope.launch {
+                    picture.placeId = id.toInt()
+                    pictureOperation.addPicture(picture)
+                }
+
             }
             return id
         }
