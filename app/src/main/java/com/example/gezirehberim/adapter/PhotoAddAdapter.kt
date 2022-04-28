@@ -13,14 +13,14 @@ import com.example.gezirehberim.view.viewholder.AddPhotoViewHolder
 class PhotoAddAdapter(
     val list: List<Uri>,
     val onClickAddPhoto: () -> Unit,
-    val onClickRemoovePhoto: (index: Int) -> Unit
+    val onClickRemovePhoto: (index: Int) -> Unit
 ) :
     RecyclerView.Adapter<AddPhotoViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AddPhotoViewHolder {
         return AddPhotoViewHolder(
             LayoutInflater.from(parent.context).inflate(R.layout.photo_add_design, parent, false),
             onClickAddPhoto,
-            onClickRemoovePhoto
+            onClickRemovePhoto
         )
     }
 

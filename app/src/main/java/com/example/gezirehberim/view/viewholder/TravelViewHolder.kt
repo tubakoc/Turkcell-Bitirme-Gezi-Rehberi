@@ -4,6 +4,7 @@ import android.content.Context
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
 import com.example.gezirehberim.R
 import com.example.gezirehberim.constant.Constant
@@ -18,6 +19,7 @@ class TravelViewHolder(itemView: View, itemClick: ((position: Int) -> Unit)) :
     var locationState: TextView
     var priorityCircle: View
     var travelDate: TextView
+    var csClick: ConstraintLayout
 
     init {
         travelImage = itemView.findViewById(R.id.travelImage)
@@ -26,8 +28,9 @@ class TravelViewHolder(itemView: View, itemClick: ((position: Int) -> Unit)) :
         locationState = itemView.findViewById(R.id.locationState)
         priorityCircle = itemView.findViewById(R.id.priorityCircle)
         travelDate = itemView.findViewById(R.id.travelDate)
+        csClick = itemView.findViewById(R.id.csClick)
 
-        itemView.setOnClickListener {
+        csClick.setOnClickListener {
             itemClick(adapterPosition)
         }
     }
@@ -41,8 +44,8 @@ class TravelViewHolder(itemView: View, itemClick: ((position: Int) -> Unit)) :
         priorityCircle.background = Constant.priorities[place.priority]
         if (place.pictureList.size > 0)
             travelImage.setImageBitmap(convertImagetoBitmap(place.pictureList[0].data))
-        //else buraya resim olmaması halinde placeholder gelecek
-            //travelImage.setImageBitmap(convertImagetoBitmap(place.pictureList[0].data))
+        else
+            travelImage.setImageResource(R.drawable.ic_recyclerview_placeholder)
     }
 
 }

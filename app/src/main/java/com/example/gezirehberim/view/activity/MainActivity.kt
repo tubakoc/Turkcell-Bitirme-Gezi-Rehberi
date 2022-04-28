@@ -5,6 +5,8 @@ import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.ui.setupWithNavController
 import com.example.gezirehberim.R
 import com.example.gezirehberim.constant.Constant
 import com.example.gezirehberim.databinding.ActivityMainBinding
@@ -38,49 +40,16 @@ class MainActivity : AppCompatActivity() {
         //her sayfada ortak olduğu main activity içerisinde import edip global değişken olarak kullanıyoruz
         topBar = binding.topBar
 
-        createViewPager()
-        changeViewPagerOrTabLayout()
-        createTab()
-        //tıklama olayları
-
         setOnClickListeners()
-        splashGoster()
-
-
-    }
-
-    private fun splashGoster() {
+        navControllerInitialize()
 
     }
 
-    private fun changeViewPagerOrTabLayout() {
-        TabLayoutMediator(binding.tabLayout, binding.viewpager) { _, _ -> }.attach()
-    }
-
-    private lateinit var viewPagerAdapter: ViewPagerAdapter
-    private fun createViewPager() {
-        viewPagerAdapter = ViewPagerAdapter(this)
-
-        viewPagerAdapter.fragmentAdd(PlaceVisitFragment())
-        viewPagerAdapter.fragmentAdd(PlaceVisitedFragment())
-
-        binding.viewpager.adapter = viewPagerAdapter
-
-    }
-
-
-
-    private fun createTab() {
-        var tab = TabLayoutBinding.inflate(layoutInflater)
-        tab.tvImage.setImageResource(R.drawable.ic_to_visit)
-        tab.tvName.text = resources.getString(R.string.toVisitText)
-        binding.tabLayout.getTabAt(0)?.customView = tab.root
-
-
-        tab = TabLayoutBinding.inflate(layoutInflater)
-        tab.tvImage.setImageResource(R.drawable.ic_visited)
-        tab.tvName.text = resources.getString(R.string.visitedText)
-        binding.tabLayout.getTabAt(1)?.customView = tab.root
+    private fun navControllerInitialize() {
+        val navHostFragment =
+            supportFragmentManager.findFragmentById(R.id.container) as NavHostFragment
+        val navController = navHostFragment.navController
+        binding.bottomNavigation.setupWithNavController(navController)
 
     }
 
@@ -94,8 +63,10 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
 
         }
-
-
     }
+
+
+
+
 
 }

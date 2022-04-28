@@ -15,9 +15,13 @@ import org.w3c.dom.Text
 class SpinnerAdapter : BaseAdapter {
     override fun getCount() = list.size
 
-    val list= priorities as ArrayList
-    constructor(){
-        list.add(0,ShapeDrawable())
+    val list = ArrayList<ShapeDrawable>()
+
+    constructor() {
+        list.add(0, ShapeDrawable())
+        priorities.forEach {
+            list.add(it)
+        }
     }
 
     override fun getItem(p0: Int): Any {

@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.gezirehberim.R
 import com.example.gezirehberim.constant.Constant
@@ -16,7 +17,7 @@ import com.example.gezirehberim.view.adapter.TravelAdapter
 
 class PlaceVisitedFragment : Fragment() {
     private var _binding: FragmentTravelBinding? = null
-    private lateinit var list: ArrayList<Place>
+    private lateinit var visitedList: ArrayList<Place>
     private val binding get() = _binding!!
 
     override fun onCreateView(
@@ -44,7 +45,7 @@ class PlaceVisitedFragment : Fragment() {
 
     private fun getVisited() {
 
-        val visitedList = PlaceLogic.getPlaceList(Constant.VISITED_LIST_ID)
+        visitedList = PlaceLogic.getPlaceList(Constant.VISITED_LIST_ID)
         val adapter = TravelAdapter(visitedList, ::itemClick)
         binding.rvTravel.adapter = adapter
 
@@ -53,6 +54,8 @@ class PlaceVisitedFragment : Fragment() {
     private fun itemClick(index: Int) {
 
         //tıklanınca detay sayfasına gidecek
+        findNavController().navigate(
+            PlaceVisitedFragmentDirections.actionPlaceVisitedFragmentToPlaceDetailFragment(visitedList[index].id))
 
     }
 

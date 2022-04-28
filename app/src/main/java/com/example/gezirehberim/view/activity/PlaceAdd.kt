@@ -163,6 +163,7 @@ class PlaceAdd : AppCompatActivity() {
                 it.date=date
             }
             VisitationLogic.addVisitation(visitation)
+
             binding.progressBar.visibility=View.GONE
             finish()
         }
@@ -421,7 +422,7 @@ class PlaceAdd : AppCompatActivity() {
                         permission
                     ) == PackageManager.PERMISSION_GRANTED
                 ) {
-
+                    showPopup()
                 } else {
 
                     notShow = true

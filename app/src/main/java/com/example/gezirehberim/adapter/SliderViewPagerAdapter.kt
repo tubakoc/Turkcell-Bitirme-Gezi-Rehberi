@@ -31,7 +31,7 @@ class SliderViewPagerAdapter(private val sliderList: List<Picture>) : PagerAdapt
             view.findViewById<ImageView>(com.example.gezirehberim.R.id.imageViewPager)
         val date =
             view.findViewById<TextView>(com.example.gezirehberim.R.id.date)
-        date.text = sliderList[position].date
+         date.text = sliderList[position].date
         image.setImageBitmap(convertImagetoBitmap(sliderList[position].data))
         container.addView(view)
         return view

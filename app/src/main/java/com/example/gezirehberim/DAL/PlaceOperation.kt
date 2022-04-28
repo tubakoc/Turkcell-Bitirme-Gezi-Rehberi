@@ -101,7 +101,7 @@ class PlaceOperation(context: Context) {
     }
 
     private fun getAllPlaces(isVisited: Int): Cursor {
-        val query = "Select * from $TABLENAME where IsVisited=?"
+        val query = "Select * from $TABLENAME where IsVisited=? order by id desc"
         return placeDatabase!!.rawQuery(query, arrayOf(isVisited.toString()))
     }
 

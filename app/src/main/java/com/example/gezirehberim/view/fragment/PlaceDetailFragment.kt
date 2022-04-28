@@ -9,6 +9,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import com.example.gezirehberim.view.activity.MainActivity.Companion._context
 import com.example.gezirehberim.adapter.SliderViewPagerAdapter
 
@@ -20,6 +22,8 @@ import com.example.gezirehberim.logic.PictureLogic
 import com.example.gezirehberim.logic.PlaceLogic
 import com.example.gezirehberim.model.Picture
 import com.example.gezirehberim.model.Place
+import com.example.gezirehberim.view.activity.MainActivity
+import com.example.gezirehberim.view.activity.MainActivity.Companion.topBar
 import com.example.gezirehberim.view.activity.MapsActivity
 import com.example.gezirehberim.view.activity.PlaceAdd
 import com.google.android.material.tabs.TabLayout
@@ -29,6 +33,9 @@ class PlaceDetailFragment : Fragment() {
     private var _binding: FragmentDetailPlaceBinding? = null
     private val binding get() = _binding!!
     lateinit var place: Place
+
+    private val args: PlaceDetailFragmentArgs by navArgs()
+
 
     private var selectedPhoto = 0
 
@@ -45,7 +52,7 @@ class PlaceDetailFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         //ilk sayfada tıklanınca id yi argument ile buraya paslarız
-        val id = arguments?.getInt("id")
+        val id = args.id
         if (id != null) {
             //id yolladığımız için tek değer dönecek bu yüzden sıfırıncı indexi aldık direkt
             place = PlaceLogic.getPlaceDetail(id)
@@ -54,14 +61,21 @@ class PlaceDetailFragment : Fragment() {
         setView()
 
 
+        topBarInitialize()
+
         //initializeSlider(place.pictureList)
 
+    }
+
+    private fun topBarInitialize() {
+        MainActivity.topBar!!.backButton.setOnClickListener { findNavController().navigateUp() }
+        MainActivity.topBar!!.backButton.visibility=View.VISIBLE
     }
 
     private fun setView() {
         binding.shortDescriptionLayout.showLocationButton.visibility = View.VISIBLE
         binding.shortDescriptionLayout.showLocationButton.setOnClickListener(btnClickForLocation)
-        binding.topBar.title.text = place
+        topBar!!.title.text = place
             .name
         binding.shortDescriptionLayout.header.text = "Yer Kısa Tanım"
         binding.shortDescriptionLayout.placeShortDescriptionTextview.hint = place.locationDefinition
@@ -156,6 +170,7 @@ class PlaceDetailFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+        MainActivity.topBar!!.backButton.visibility=View.GONE
     }
 
 

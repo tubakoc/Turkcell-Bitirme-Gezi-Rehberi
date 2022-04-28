@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/placeVisitFragment">
+
+    <fragment
+        android:id="@+id/placeDetailFragment"
+        tools:layout="@layout/fragment_detail_place"
+        android:name="com.example.gezirehberim.view.fragment.PlaceDetailFragment"
+        android:label="PlaceDetailFragment" >
+        <argument
+            android:name="id"
+            app:argType="integer" />
+    </fragment>
+    <fragment
+        tools:layout="@layout/fragment_travel"
+        android:id="@+id/placeVisitFragment"
+        android:name="com.example.gezirehberim.view.fragment.PlaceVisitFragment"
+        android:label="PlaceVisitFragment" >
+        <action
+            app:enterAnim="@android:anim/slide_in_left"
+            app:exitAnim="@android:anim/slide_out_right"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim"
+            android:id="@+id/action_placeVisitFragment_to_placeDetailFragment"
+            app:destination="@id/placeDetailFragment" />
+    </fragment>
+    <fragment
+        tools:layout="@layout/fragment_travel"
+        android:id="@+id/placeVisitedFragment"
+        android:name="com.example.gezirehberim.view.fragment.PlaceVisitedFragment"
+        android:label="PlaceVisitedFragment" >
+        <action
+            android:id="@+id/action_placeVisitedFragment_to_placeDetailFragment"
+            app:destination="@id/placeDetailFragment"
+            app:enterAnim="@android:anim/slide_in_left"
+            app:exitAnim="@android:anim/slide_out_right"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+    </fragment>
+</navigation>
