@@ -124,6 +124,7 @@ class PlaceAdd : AppCompatActivity() {
 
         resultLauncher.launch(intent)
     }
+
     private var resultLauncher = registerForActivityResult(
         ActivityResultContracts.StartActivityForResult(),
         ::getLocationResult
@@ -132,13 +133,16 @@ class PlaceAdd : AppCompatActivity() {
     private fun getLocationResult(result: ActivityResult) {
 
         if (result.resultCode == RESULT_OK) {
-        //konum alındı
-            lat = result.data?.getDoubleExtra("lat",361.0)!!
-            long = result.data?.getDoubleExtra("long",361.0)!!
-            if (lat==361.0||long==361.0) {
-               Toast.makeText(this,"Konum ekleme işlemi başarısız oldu lütfen tekrar deneyiniz.",Toast.LENGTH_LONG).show()
-            }
-            else{
+            //konum alındı
+            lat = result.data?.getDoubleExtra("lat", 361.0)!!
+            long = result.data?.getDoubleExtra("long", 361.0)!!
+            if (lat == 361.0 || long == 361.0) {
+                Toast.makeText(
+                    this,
+                    "Konum ekleme işlemi başarısız oldu lütfen tekrar deneyiniz.",
+                    Toast.LENGTH_LONG
+                ).show()
+            } else {
                 Log.d("konum", "$lat  $long")
             }
 
@@ -155,6 +159,7 @@ class PlaceAdd : AppCompatActivity() {
 
 
         if (choosePhotoList.size > 1 && lat != 361.0 && long != 361.0 && placeName.isNotEmpty() && placeShortDescription.isNotEmpty() && description.isNotEmpty() && priority != 0) {
+            binding.progressBar.visibility = View.VISIBLE
             val place = Place()
             place.latitude = lat
             place.longitude = long
@@ -165,8 +170,10 @@ class PlaceAdd : AppCompatActivity() {
             place.locationDefinition = placeShortDescription
             place.pictureList = setPictureList()
             PlaceLogic.addPlace(place)
+            binding.progressBar.visibility = View.GONE
             finish()
         } else {
+            binding.progressBar.visibility=View.GONE
             showToast(MainActivity._context!!.getString(R.string.info_empty))
         }
 
@@ -179,7 +186,8 @@ class PlaceAdd : AppCompatActivity() {
         val pc = Picture()
 
         choosePhotoListBitmap.forEach {
-            pc.data = convertBitmaptoBase64(it)
+//boyutu düşürmek için yapıldı boyut çok yüksek olunca dbye kaydedilmiyor
+            pc.data = convertBitmaptoBase64(Bitmap.createScaledBitmap(it, 300, 300, false))
             pc.date = getCurrentDate()
             list.add(pc)
         }
@@ -266,7 +274,8 @@ class PlaceAdd : AppCompatActivity() {
     }
 
     private fun showPopup() {
-        val alert = android.app.AlertDialog.Builder(this).setTitle("Hangi kaynaktan fotoğraf yükleyeceksiniz?")
+        val alert = android.app.AlertDialog.Builder(this)
+            .setTitle("Hangi kaynaktan fotoğraf yükleyeceksiniz?")
             .setPositiveButton("Galeri") { d, _ ->
                 openGallery(); d.dismiss()
             }.setNegativeButton("Kamera") { d, _ ->
@@ -392,9 +401,6 @@ class PlaceAdd : AppCompatActivity() {
         startActivity(intent)
 
     }
-
-
-
 
 
 }

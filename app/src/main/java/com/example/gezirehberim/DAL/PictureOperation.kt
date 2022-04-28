@@ -30,6 +30,7 @@ class PictureOperation(context: Context) {
             pictureDatabase!!.close()
         }
     }
+
     fun addPicture(picture: Picture): Long {
         val contentValues = ContentValues()
         contentValues.put(DATA, picture.data)
@@ -41,6 +42,7 @@ class PictureOperation(context: Context) {
         return record
 
     }
+
     fun deletePicture(id: Int) {
 
         open()
@@ -49,11 +51,11 @@ class PictureOperation(context: Context) {
     }
 
 
-
     private fun getPicturesByPlaceId(id: Int): Cursor {
         val query = "Select * from $TABLENAME where PlaceId=?"
         return pictureDatabase!!.rawQuery(query, arrayOf(id.toString()))
     }
+
     private fun getPicturesByVisitationId(id: Int): Cursor {
         val query = "Select * from $TABLENAME where VisitationId=?"
         return pictureDatabase!!.rawQuery(query, arrayOf(id.toString()))
@@ -61,10 +63,10 @@ class PictureOperation(context: Context) {
 
 
     @SuppressLint("Range")
-    fun getPictures(visitationId: Int?,PlaceId: Int?): ArrayList<Picture> {
+    fun getPictures(visitationId: Int?, PlaceId: Int?): ArrayList<Picture> {
         open()
         val pictureList = ArrayList<Picture>()
-        val picture = Picture()
+        var picture: Picture
         val cursor: Cursor = if (visitationId != null) {
             getPicturesByVisitationId(visitationId)
         } else {
@@ -74,7 +76,7 @@ class PictureOperation(context: Context) {
 
         if (cursor.moveToFirst()) {
             do {
-
+                picture = Picture()
                 picture.id = cursor.getInt(0)
                 picture.placeId = cursor.getInt(cursor.getColumnIndex(PLACEID))
                 picture.visitationId = cursor.getInt(cursor.getColumnIndex(VISITATIONID))

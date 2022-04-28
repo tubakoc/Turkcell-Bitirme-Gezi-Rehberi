@@ -81,7 +81,7 @@ class VisitationOperation(context: Context) {
     fun getVisitation(placeId: Int?): ArrayList<Visitation> {
         open()
         val visitationList = ArrayList<Visitation>()
-        val visitation = Visitation()
+        var visitation: Visitation
         val cursor: Cursor = if (placeId != null) {
             getVisitationByPlaceId(placeId)
         } else {
@@ -91,7 +91,7 @@ class VisitationOperation(context: Context) {
 
         if (cursor.moveToFirst()) {
             do {
-
+                visitation = Visitation()
                 visitation.id = cursor.getInt(0)
                 visitation.description = cursor.getString(cursor.getColumnIndex(DESCRIPTION))
                 visitation.date = cursor.getString(cursor.getColumnIndex(DATE))
