@@ -16,7 +16,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.GeziRehberim">
         <activity
-            android:name=".view.SplashScreen"
+            android:name=".view.activity.SplashScreen"
             android:exported="true"
             android:theme="@style/Theme.SplashScreen">
             <intent-filter>

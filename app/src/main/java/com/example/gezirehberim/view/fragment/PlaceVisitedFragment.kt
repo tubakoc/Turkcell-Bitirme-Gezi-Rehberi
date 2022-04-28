@@ -6,7 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.gezirehberim.R
 import com.example.gezirehberim.constant.Constant
 import com.example.gezirehberim.databinding.FragmentTravelBinding

@@ -10,13 +10,8 @@ import androidx.navigation.ui.setupWithNavController
 import com.example.gezirehberim.R
 import com.example.gezirehberim.constant.Constant
 import com.example.gezirehberim.databinding.ActivityMainBinding
-import com.example.gezirehberim.databinding.TabLayoutBinding
 import com.example.gezirehberim.databinding.TopBarBinding
-import com.example.gezirehberim.view.adapter.ViewPagerAdapter
-import com.example.gezirehberim.view.fragment.PlaceDetailFragment
-import com.example.gezirehberim.view.fragment.PlaceVisitFragment
-import com.example.gezirehberim.view.fragment.PlaceVisitedFragment
-import com.google.android.material.tabs.TabLayoutMediator
+
 
 class MainActivity : AppCompatActivity() {
 
