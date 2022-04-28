@@ -81,8 +81,7 @@ class PlaceDetailFragment : Fragment() {
         initializeVisitation()
         binding.shortDescriptionLayout.showLocationButton.visibility = View.VISIBLE
         binding.shortDescriptionLayout.showLocationButton.setOnClickListener(btnClickForLocation)
-        topBar!!.title.text = place
-            .name
+        topBar!!.title.text = place.name
         binding.shortDescriptionLayout.header.text = "Yer Kısa Tanım"
         binding.shortDescriptionLayout.placeShortDescriptionTextview.hint = place.locationDefinition
         binding.shortDescriptionLayout.placeShortDescriptionTextview.isEnabled=false
@@ -90,10 +89,11 @@ class PlaceDetailFragment : Fragment() {
         binding.descriptionLayout.descriptionTextview.hint = place
             .description
         binding.addVisitButton.setOnClickListener(btnClickAddVisit)
-        //ekranda deneme amaçlı öncelik değeri gösterir
         binding.priorityDrawable.background = priorities[place.priority]
         pictureList = PictureLogic.returnPicturesForSlider(place)
-
+        if(pictureList.size<1){
+            pictureList=place.pictureList
+        }
         initializeSlider()
     }
 
@@ -128,7 +128,7 @@ class PlaceDetailFragment : Fragment() {
                     .name
             )
             requireActivity().startActivity(intent)
-            requireActivity().finish()
+
         }
     }
 

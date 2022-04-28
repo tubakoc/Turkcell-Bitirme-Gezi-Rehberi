@@ -51,6 +51,10 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         lat = intent.getDoubleExtra("lat", 361.0)
         long = intent.getDoubleExtra("long", 361.0)
 
+        binding.topBar.title.text="Konum Seç"
+        binding.topBar.backButton.visibility=View.VISIBLE
+        binding.topBar.backButton.setOnClickListener { finish() }
+
         ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.ACCESS_FINE_LOCATION), 1)
     }
 
