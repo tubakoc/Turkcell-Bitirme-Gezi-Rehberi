@@ -14,6 +14,7 @@ class PictureOperation(context: Context) {
     private val VISITATIONID = "VisitationId"
     private val DATA = "Data"
     private val TABLENAME = "Picture"
+    private val DATE="Date"
     var dbOpenHelper: DatabaseOpenHelper
 
     init {
@@ -36,6 +37,8 @@ class PictureOperation(context: Context) {
         contentValues.put(DATA, picture.data)
         contentValues.put(PLACEID, picture.placeId)
         contentValues.put(VISITATIONID, picture.visitationId)
+        contentValues.put(DATE,picture.date)
+
         open()
         val record = pictureDatabase!!.insert(TABLENAME, null, contentValues)
         close()
@@ -81,6 +84,7 @@ class PictureOperation(context: Context) {
                 picture.placeId = cursor.getInt(cursor.getColumnIndex(PLACEID))
                 picture.visitationId = cursor.getInt(cursor.getColumnIndex(VISITATIONID))
                 picture.data = cursor.getString(cursor.getColumnIndex(DATA))
+                picture.date=cursor.getString(cursor.getColumnIndex(DATE))
 
                 pictureList.add(picture)
             } while (cursor.moveToNext())

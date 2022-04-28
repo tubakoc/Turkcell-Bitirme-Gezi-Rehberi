@@ -21,6 +21,7 @@ import com.example.gezirehberim.logic.PlaceLogic
 import com.example.gezirehberim.model.Picture
 import com.example.gezirehberim.model.Place
 import com.example.gezirehberim.view.activity.MapsActivity
+import com.example.gezirehberim.view.activity.PlaceAdd
 import com.google.android.material.tabs.TabLayout
 
 class PlaceDetailFragment : Fragment() {
@@ -68,6 +69,7 @@ class PlaceDetailFragment : Fragment() {
         binding.descriptionLayout.header.text = "Kısa Açıklama"
         binding.descriptionLayout.descriptionTextview.hint = place
             .description
+        binding.addVisitButton.setOnClickListener(btnClickAddVisit)
         //ekranda deneme amaçlı öncelik değeri gösterir
         binding.priorityDrawable.background = priorities[place.priority]
 
@@ -76,6 +78,11 @@ class PlaceDetailFragment : Fragment() {
 
     private val btnClickForLocation = View.OnClickListener {
         goToMapsActivity()
+    }
+    private val btnClickAddVisit=View.OnClickListener {
+        val intent=Intent(requireContext(),PlaceAdd::class.java)
+        intent.putExtra("placeId",place.id)
+        startActivity(intent)
     }
 
     private fun goToMapsActivity() {

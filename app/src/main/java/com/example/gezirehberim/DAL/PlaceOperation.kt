@@ -41,14 +41,14 @@ class PlaceOperation(context: Context) {
 
         contentValues.put(ISVISITED, visited)
         open()
-        placeDatabase!!.execSQL("Update $TABLENAME SET $ISVISITED =CASE WHEN $ISVISITED=0 THEN $ISVISITED=1 END WHERE Id=$id  ")
-//        placeDatabase!!.update(
-//            TABLENAME,
-//
-//            contentValues,
-//            "Id = ?",
-//            arrayOf(id.toString())
-//        )
+      //placeDatabase!!.execSQL("Update $TABLENAME SET $ISVISITED =CASE WHEN $ISVISITED=0 THEN $ISVISITED=1 END WHERE Id=$id  ")
+        placeDatabase!!.update(
+            TABLENAME,
+
+            contentValues,
+            "Id = ?",
+            arrayOf(id.toString())
+        )
         close()
 
     }

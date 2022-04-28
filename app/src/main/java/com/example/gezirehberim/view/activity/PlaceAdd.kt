@@ -3,6 +3,7 @@ package com.example.gezirehberim.view.activity
 import android.Manifest
 import android.annotation.SuppressLint
 import android.app.Activity
+import android.app.DatePickerDialog
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
@@ -30,10 +31,15 @@ import com.example.gezirehberim.adapter.PhotoAddAdapter
 import com.example.gezirehberim.constant.*
 import com.example.gezirehberim.databinding.ActivityPlaceAddBinding
 import com.example.gezirehberim.logic.PlaceLogic
+import com.example.gezirehberim.logic.VisitationLogic
 import com.example.gezirehberim.model.Picture
 import com.example.gezirehberim.model.Place
+import com.example.gezirehberim.model.Visitation
 import com.example.gezirehberim.view.adapter.PlacePhotoAdapter
 import java.io.File
+import java.util.*
+import javax.xml.datatype.DatatypeConstants.MONTHS
+import kotlin.collections.ArrayList
 
 class PlaceAdd : AppCompatActivity() {
 
@@ -41,7 +47,7 @@ class PlaceAdd : AppCompatActivity() {
     private var lat: Double = 361.0
     private var long: Double = 361.0
 
-
+    var date=""
     private var priority = 0
     private lateinit var choosePhotoList: ArrayList<Uri>
     private var choosePhotoListBitmap = ArrayList<Bitmap>()
@@ -60,7 +66,7 @@ class PlaceAdd : AppCompatActivity() {
         binding.topBar.title.text = "Yer Ekle"
 
         setOnClicks()
-        spinnerInitialize()
+
         initializePhotoAddRecycler()
 
     }
@@ -70,13 +76,36 @@ class PlaceAdd : AppCompatActivity() {
         isPLaceOrVisit = intent.getBooleanExtra("placeOrVisit", false)
 
         if (isPLaceOrVisit) {
+            spinnerInitialize()
             setPlaceInitialize()
         } else {
             setVisitInitialize()
         }
     }
 
-    private fun setVisitInitialize() {
+    private fun setVisitInitialize()= binding.apply {
+        topBar.title.text="Yer Adı"
+        addLocationButton.visibility=View.INVISIBLE
+        visitDate.header.text="Ziyaret Tarihi"
+
+        placeShortDescription.root.visibility=View.GONE
+        visitDate.root.setOnClickListener {   val c = Calendar.getInstance()
+            val year = c.get(Calendar.YEAR)
+            val month = c.get(Calendar.MONTH)
+            val day = c.get(Calendar.DAY_OF_MONTH)
+
+
+            val dpd = DatePickerDialog(this@PlaceAdd, DatePickerDialog.OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
+
+                date= dayOfMonth.toString()+"."+(monthOfYear+1).toString()+"."+year.toString()
+                // Display Selected date in textbox
+                visitDate.placeShortDescriptionTextview.setText(date)
+
+            }, year, month, day)
+
+            dpd.show() }
+        visitDescription.header.text="Ziyaret Açıklaması"
+
 
     }
 
@@ -108,10 +137,38 @@ class PlaceAdd : AppCompatActivity() {
     }
 
     private fun setOnClicks() = binding.apply {
-        saveButtonLayout.btnMapApply.setOnClickListener { savePlace() }
+        saveButtonLayout.btnMapApply.setOnClickListener {
+            if(isPLaceOrVisit){
+                savePlace()
+            }
+            else{
+                saveVisit()
+            }
+      }
 
         addLocationButton.setOnClickListener(btnClickAddLocation)
         topBar.backButton.setOnClickListener { finish() }
+    }
+
+    private fun saveVisit() {
+        val description=binding.visitDescription.descriptionTextview.text.toString()
+        if(date!=""||description.isNotEmpty()){
+            binding.progressBar.visibility = View.VISIBLE
+            val visitation=Visitation()
+            visitation.placeId=intent.getIntExtra("placeId",1)
+            visitation.date=date
+            visitation.description=description
+            visitation.pictureList=setPictureList()
+            visitation.pictureList.forEach {
+                it.date=date
+            }
+            VisitationLogic.addVisitation(visitation)
+            binding.progressBar.visibility=View.GONE
+            finish()
+        }
+        else{
+            showToast(MainActivity._context!!.getString(R.string.info_empty))
+        }
     }
 
     private val btnClickAddLocation = View.OnClickListener {

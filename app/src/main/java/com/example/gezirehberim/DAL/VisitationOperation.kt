@@ -9,9 +9,10 @@ import com.example.gezirehberim.model.Visitation
 
 class VisitationOperation(context: Context) {
     var visitationDatabase: SQLiteDatabase? = null
-    private val DATE = "Name"
+    private val DATE = "Date"
     private val DESCRIPTION = "Description"
     private val TABLENAME = "Visitation"
+    private val PLACEID="PlaceId"
 
     var dbOpenHelper: DatabaseOpenHelper
 
@@ -33,6 +34,7 @@ class VisitationOperation(context: Context) {
     fun addVisitation(visitation: Visitation): Long {
         val contentValues = ContentValues()
         contentValues.put(DATE, visitation.date)
+        contentValues.put(PLACEID,visitation.placeId)
         contentValues.put(DESCRIPTION, visitation.description)
         open()
         val record = visitationDatabase!!.insert(TABLENAME, null, contentValues)
@@ -93,6 +95,7 @@ class VisitationOperation(context: Context) {
             do {
                 visitation = Visitation()
                 visitation.id = cursor.getInt(0)
+                visitation.placeId=cursor.getInt(cursor.getColumnIndex(PLACEID))
                 visitation.description = cursor.getString(cursor.getColumnIndex(DESCRIPTION))
                 visitation.date = cursor.getString(cursor.getColumnIndex(DATE))
 

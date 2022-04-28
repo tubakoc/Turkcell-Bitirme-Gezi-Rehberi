@@ -16,10 +16,10 @@ class DatabaseOpenHelper(
             "CREATE TABLE Place(Id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, Name TEXT,LocationDefinition TEXT,Description TEXT,Priority INTEGER,Latitude REAL NOT NULL,Longitude REAL NOT NULL,IsVisited INTEGER NOT NULL) "
         p0.execSQL(query)
         query =
-            "CREATE TABLE Visitation(Id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,PlaceId INTEGER NOT NULL,Date TEXT,Amount REAL NOT NULL, FOREIGN KEY(PlaceId) REFERENCES Place(Id)) "
+            "CREATE TABLE Visitation(Id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,PlaceId INTEGER NOT NULL,Date TEXT,Description TEXT, FOREIGN KEY(PlaceId) REFERENCES Place(Id)) "
         p0.execSQL(query)
         query =
-            "CREATE TABLE Picture(Id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,PlaceId INTEGER ,VisitationId INTEGER,Data TEXT NOT NULL) "
+            "CREATE TABLE Picture(Id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,PlaceId INTEGER ,VisitationId INTEGER,Data TEXT NOT NULL,Date TEXT) "
         p0.execSQL(query)
     }
 
