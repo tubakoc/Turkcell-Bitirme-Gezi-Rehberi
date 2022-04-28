@@ -93,7 +93,9 @@ class PlaceDetailFragment : Fragment() {
         //ekranda deneme amaçlı öncelik değeri gösterir
         binding.priorityDrawable.background = priorities[place.priority]
         pictureList = PictureLogic.returnPicturesForSlider(place)
-
+        if(pictureList.size<1){
+            pictureList=place.pictureList
+        }
         initializeSlider()
     }
 
