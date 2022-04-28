@@ -42,6 +42,22 @@ class VisitationOperation(context: Context) {
         return record
 
     }
+    @SuppressLint("Range")
+    fun getLastVisitDate(placeId: Int):String{
+      ;
+        val query = "SELECT Date FROM $TABLENAME WHERE   Id = (SELECT MAX(Id)  FROM $TABLENAME)"
+        val cursor= visitationDatabase!!.rawQuery(query, arrayOf(placeId.toString()))
+        var date=""
+        if (cursor.moveToFirst()) {
+            do {
+
+               date = cursor.getString(cursor.getColumnIndex(DATE))
+
+            } while (cursor.moveToNext())
+
+        }
+        return date
+    }
 
     fun updateVisitation(visitation: Visitation) {
 

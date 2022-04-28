@@ -11,6 +11,7 @@ import com.example.gezirehberim.R
 import com.example.gezirehberim.constant.Constant
 import com.example.gezirehberim.databinding.FragmentTravelBinding
 import com.example.gezirehberim.logic.PlaceLogic
+import com.example.gezirehberim.logic.VisitationLogic
 import com.example.gezirehberim.model.Place
 import com.example.gezirehberim.view.activity.MainActivity
 import com.example.gezirehberim.view.adapter.TravelAdapter
@@ -37,6 +38,7 @@ class PlaceVisitedFragment : Fragment() {
         super.onResume()
 
         MainActivity.topBar?.title?.text = getString(R.string.visitedText)
+
         getVisited()
 
         //logic veri çek listeye ekle adaptar a bas
@@ -46,7 +48,9 @@ class PlaceVisitedFragment : Fragment() {
     private fun getVisited() {
 
         visitedList = PlaceLogic.getPlaceList(Constant.VISITED_LIST_ID)
+
         val adapter = TravelAdapter(visitedList, ::itemClick)
+
         binding.rvTravel.adapter = adapter
 
     }

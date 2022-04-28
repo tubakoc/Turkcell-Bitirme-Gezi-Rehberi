@@ -18,6 +18,7 @@ class PlaceOperation(context: Context) {
     private val LONGITUDE = "Longitude"
     private val ISVISITED = "IsVisited"
     private val TABLENAME = "Place"
+    private val LASTVISIT="LastVisit"
 
     var dbOpenHelper: DatabaseOpenHelper
 
@@ -36,10 +37,11 @@ class PlaceOperation(context: Context) {
         }
     }
 
-    fun setVisit(id: Int, visited: Int) {
+    fun setVisit(id: Int, visited: Int, date: String) {
         val contentValues = ContentValues()
 
         contentValues.put(ISVISITED, visited)
+        contentValues.put(LASTVISIT,date)
         open()
       //placeDatabase!!.execSQL("Update $TABLENAME SET $ISVISITED =CASE WHEN $ISVISITED=0 THEN $ISVISITED=1 END WHERE Id=$id  ")
         placeDatabase!!.update(
@@ -134,6 +136,7 @@ class PlaceOperation(context: Context) {
                 place.isVisited = cursor.getInt(cursor.getColumnIndex(ISVISITED))
                 place.latitude = cursor.getDouble(cursor.getColumnIndex(LATITUDE))
                 place.longitude = cursor.getDouble(cursor.getColumnIndex(LONGITUDE))
+                place.lasVisitDate=cursor.getString(cursor.getColumnIndex(LASTVISIT))
 
                 placeList.add(place)
             } while (cursor.moveToNext())

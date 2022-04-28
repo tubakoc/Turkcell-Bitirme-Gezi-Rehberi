@@ -12,6 +12,7 @@ class Place {
     var latitude by Delegates.notNull<Double>()
     var longitude by Delegates.notNull<Double>()
     var visitationList = ArrayList<Visitation>()
+    var lasVisitDate:String?=null
     //sqlite boolean değer almadığı için 0 ve 1 kullanarak ziyaret durumu kontrol edilecek
     var isVisited=0
 }

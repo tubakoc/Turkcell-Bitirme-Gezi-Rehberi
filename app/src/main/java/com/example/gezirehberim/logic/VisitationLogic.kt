@@ -1,10 +1,7 @@
 package com.example.gezirehberim.logic
 
-import android.content.Context
 import com.example.gezirehberim.DAL.PictureOperation
-import com.example.gezirehberim.DAL.PlaceOperation
 import com.example.gezirehberim.DAL.VisitationOperation
-import com.example.gezirehberim.model.Place
 import com.example.gezirehberim.model.Visitation
 import com.example.gezirehberim.view.activity.MainActivity
 import kotlinx.coroutines.DelicateCoroutinesApi
@@ -17,7 +14,7 @@ class VisitationLogic {
         fun addVisitation( visitation: Visitation): Long {
             val visitationOperation = VisitationOperation(MainActivity._context!!)
             val pictureOperation = PictureOperation(MainActivity._context!!)
-            PlaceLogic.setVisit(visitation.placeId)
+            PlaceLogic.setVisit(visitation.placeId,visitation.date)
 
             val id = visitationOperation.addVisitation(visitation)
             GlobalScope.launch {
@@ -36,6 +33,10 @@ class VisitationLogic {
                 visitation.pictureList=PictureOperation(MainActivity._context!!).getPictures(visitation.id,null)
             }
             return list
+        }
+        fun getLastVisitDate(placeId: Int):String{
+            val visitationOperation = VisitationOperation(MainActivity._context!!)
+            return visitationOperation.getLastVisitDate(placeId)
         }
     }
 }

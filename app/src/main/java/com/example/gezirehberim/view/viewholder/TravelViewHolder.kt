@@ -37,7 +37,13 @@ class TravelViewHolder(itemView: View, itemClick: ((position: Int) -> Unit)) :
 
     fun bindData(place: Place) {
         //  Model oluşturulduktan sonra atama işlemleri yapılacak priority traveldate image eklenecek
-
+        if (place.isVisited == 1 && place.lasVisitDate != null) {
+            travelDate.visibility=View.VISIBLE
+            travelDate.text=place.lasVisitDate
+            priorityCircle.visibility = View.GONE
+        } else {
+            travelDate.visibility = View.GONE
+        }
         locationName.text = place.name
         locationDef.text = place.locationDefinition
         locationState.text = place.description

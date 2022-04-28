@@ -1,11 +1,9 @@
 package com.example.gezirehberim.logic
 
-import android.content.Context
 import com.example.gezirehberim.DAL.PictureOperation
 import com.example.gezirehberim.DAL.PlaceOperation
 import com.example.gezirehberim.DAL.VisitationOperation
 import com.example.gezirehberim.model.Place
-import com.example.gezirehberim.model.Visitation
 import com.example.gezirehberim.view.activity.MainActivity.Companion._context
 
 class PlaceLogic {
@@ -29,10 +27,10 @@ class PlaceLogic {
             }
             return list
         }
-        fun setVisit(placeId:Int){
+        fun setVisit(placeId: Int, date: String){
 
                 val placeOperation=PlaceOperation(_context!!)
-                placeOperation.setVisit(placeId,1)
+                placeOperation.setVisit(placeId,1,date)
 
 
         }
