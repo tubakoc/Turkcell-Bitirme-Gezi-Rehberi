@@ -43,6 +43,8 @@ class PlaceLogic {
             val place=PlaceOperation(_context!!).getPlace(id,null)[0]
             place.pictureList=PictureOperation(_context!!).getPictures(null,place.id)
 
+                place.pictureList=PictureOperation(_context!!).getPictures(null,place.id)
+
                val visitationList=VisitationOperation(_context!!).getVisitation(id)
                 for (visitation in visitationList){
                     visitation.pictureList=PictureOperation(_context!!).getPictures(visitation.id,null)
